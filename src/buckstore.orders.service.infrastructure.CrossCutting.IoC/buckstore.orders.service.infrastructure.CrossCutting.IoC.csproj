@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="9.0.0" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\buckstore.orders.service.application\buckstore.orders.service.application.csproj" />
+      <ProjectReference Include="..\buckstore.orders.service.infrastructure.Data\buckstore.orders.service.infrastructure.Data.csproj" />
+    </ItemGroup>
+    
+
+</Project>
