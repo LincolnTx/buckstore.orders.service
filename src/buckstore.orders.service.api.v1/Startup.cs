@@ -45,8 +45,9 @@ namespace buckstore.orders.service.api.v1
 				app.UseDeveloperExceptionPage();
 			}
 
-			app.UseHttpsRedirection();
+			// app.UseHttpsRedirection();
 
+			app.UseCors(option => option.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 			app.UseRouting();
 
 			app.UseAuthorization();
