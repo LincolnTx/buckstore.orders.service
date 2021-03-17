@@ -37,7 +37,7 @@ namespace buckstore.orders.service.domain.Aggregates.OrderAggregate
             var orderItem = new OrderItem(productName, quantity, price);
             _orderItems.Add(orderItem);
         }
-
+        // TODO Criar domain event para quando o pedido mudar de status, Cancelado ou aceito
         void CalculateGoods(double price)
         {
             _value += price;
