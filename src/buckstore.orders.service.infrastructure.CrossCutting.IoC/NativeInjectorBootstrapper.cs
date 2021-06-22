@@ -1,8 +1,11 @@
 ﻿using System;
-using AutoMapper.Configuration;
-using buckstore.orders.service.domain.Exceptions;
 using MediatR;
+using AutoMapper.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using buckstore.orders.service.domain.Exceptions;
+using buckstore.orders.service.application.IntegrationEvents;
+using buckstore.orders.service.application.Adapters.MessageBroker;
+using buckstore.orders.service.infrastructure.bus.MessageBroker.Kafka.Producers;
 
 namespace buckstore.orders.service.infrastructure.CrossCutting.IoC
 {
@@ -12,6 +15,7 @@ namespace buckstore.orders.service.infrastructure.CrossCutting.IoC
 		{
 			RegisterData(services);
 			RegisterMediatR(services);
+			RegisterProducers(services);
 		}
 
 		public static void RegisterData(IServiceCollection services)
@@ -24,6 +28,11 @@ namespace buckstore.orders.service.infrastructure.CrossCutting.IoC
 		{
 			// injection for Mediator
 			services.AddScoped<INotificationHandler<ExceptionNotification>, ExceptionNotificationHandler>();
+		}
+
+		public static void RegisterProducers(IServiceCollection services)
+		{
+			services.AddScoped<IMessageProducer<OrderFinishedIntegrationEvent>, KafkaProducer<OrderFinishedIntegrationEvent>>();
 		}
 	}
 }
