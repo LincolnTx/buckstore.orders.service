@@ -23,7 +23,14 @@
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "KafkaConfiguration__ConnectionString": "localhost:9092",
+        "KafkaConfiguration__Group": "buckstore",
+        "KafkaConfiguration__ManagerToOrdersCreate": "manager-to-orders-create",
+        "KafkaConfiguration__ManagerToOrdersUpdate": "manager-to-orders-update",
+        "KafkaConfiguration__ManagerToOrdersDelete": "manager-to-orders-delete",
+        "KafkaConfiguration__OrdersToManager": "orders-to-manager",
+        "KafkaConfiguration__OrdersToProducts": "order-to-products"
       }
     }
   }
