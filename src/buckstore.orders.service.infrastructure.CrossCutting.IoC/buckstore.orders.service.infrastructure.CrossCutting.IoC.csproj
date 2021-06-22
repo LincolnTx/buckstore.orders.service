@@ -17,6 +17,7 @@
       <ProjectReference Include="..\buckstore.orders.service.application\buckstore.orders.service.application.csproj" />
       <ProjectReference Include="..\buckstore.orders.service.infrastructure.bus\buckstore.orders.service.infrastructure.bus.csproj" />
       <ProjectReference Include="..\buckstore.orders.service.infrastructure.Data\buckstore.orders.service.infrastructure.Data.csproj" />
+      <ProjectReference Include="..\buckstore.orders.service.infrastructure.environment\buckstore.orders.service.infrastructure.environment.csproj" />
     </ItemGroup>
     
 

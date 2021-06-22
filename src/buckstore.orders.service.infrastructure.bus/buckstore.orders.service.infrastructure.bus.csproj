@@ -11,10 +11,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="MessageBroker\Kafka\Consumers" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\buckstore.orders.service.application\buckstore.orders.service.application.csproj" />
     </ItemGroup>
 

@@ -1,5 +1,4 @@
-﻿using System;
-using MediatR;
+﻿using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using buckstore.orders.service.domain.Exceptions;
@@ -35,6 +34,7 @@ namespace buckstore.orders.service.infrastructure.CrossCutting.IoC
 		public static void RegisterProducers(IServiceCollection services)
 		{
 			services.AddScoped<IMessageProducer<OrderFinishedIntegrationEvent>, KafkaProducer<OrderFinishedIntegrationEvent>>();
+			services.AddScoped<IMessageProducer<OrderToManagerIntegrationEvent>, KafkaProducer<OrderToManagerIntegrationEvent>>();
 		}
 
 		public static void RegisterEnvironment(IServiceCollection services, IConfiguration configuration)
