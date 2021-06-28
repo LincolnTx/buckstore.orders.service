@@ -6,9 +6,9 @@ namespace buckstore.orders.service.application.EventHandlers.IntegrationEvents
 {
     public class ProductCreatedEventHandler : EventHandler<ProductCreatedIntegrationEvent>
     {
-        public override Task Handle(ProductCreatedIntegrationEvent notification, CancellationToken cancellationToken)
+        public async override Task Handle(ProductCreatedIntegrationEvent notification, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }
