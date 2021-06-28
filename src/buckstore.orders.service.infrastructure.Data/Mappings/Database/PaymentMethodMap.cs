@@ -13,9 +13,8 @@ namespace buckstore.orders.service.infrastructure.Data.Mappings.Database
 
             builder.HasKey(p => p.Id);
             
-            // verificar
-            // builder.Property<Guid>("BuyerId")
-            //     .IsRequired();
+            builder.Property<Guid>("BuyerId")
+                .IsRequired();
             
             builder.Property<string>("_cardHolderName")
                 .UsePropertyAccessMode(PropertyAccessMode.Field)

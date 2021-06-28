@@ -11,6 +11,7 @@ namespace buckstore.orders.service.domain.Aggregates.BuyerAggregate
         private string _securityNumber;
         private string _cardHolderName;
         private DateTime _expiration;
+        public Guid BuyerId { get; private set; }
         
         protected PaymentMethod() { }
 

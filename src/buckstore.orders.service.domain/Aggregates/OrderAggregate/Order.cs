@@ -19,8 +19,7 @@ namespace buckstore.orders.service.domain.Aggregates.OrderAggregate
         private DateTime _orderDate;
         private Guid _paymentMethodId;
 
-        public Order(Guid userId, string userName, string cpf,  Address address, int cardTypeId, string cardNumber, 
-            string cardSecurityNumber, DateTime cardExpiration, Guid buyerId, Guid paymentMethodId)
+        public Order(Guid buyerId, string userName, string cpf,  Address address, Guid paymentMethodId)
         {
             _buyerid = buyerId;
             _paymentMethodId = paymentMethodId;
@@ -35,15 +34,16 @@ namespace buckstore.orders.service.domain.Aggregates.OrderAggregate
             _orderItems = new List<OrderItem>();
         }
 
-        public void AddDeliveryItem(Guid itemId, string productName, int quantity, decimal price)
+        public void AddDeliveryItem(Guid productId, string productName, int quantity, decimal price)
         {
             if (quantity < 1)
             {
                 throw new Exception("Produto deve ter pelo menos 1 unidade");
             }
 
-            var orderItem = new OrderItem(itemId, productName, quantity, price);
+            var orderItem = new OrderItem(productId, productName, quantity, price);
             _orderItems.Add(orderItem);
+            CalculateGoods(price);
         }
         // TODO Criar domain event para quando o pedido mudar de status, Cancelado ou aceito
         void CalculateGoods(decimal price)
