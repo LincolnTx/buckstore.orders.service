@@ -23,7 +23,7 @@ namespace buckstore.orders.service.infrastructure.Data.Mappings.Database
                 .IsRequired()
                 .HasColumnName("Status");
 
-            builder.HasData(OrderStatus.Pending, OrderStatus.Accept, OrderStatus.Cancelled);
+            builder.HasData(OrderStatus.Submitted, OrderStatus.StockConfirmation, OrderStatus.Accept, OrderStatus.Cancelled);
         }
     }
 }
