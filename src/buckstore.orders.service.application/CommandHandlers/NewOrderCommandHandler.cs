@@ -1,11 +1,12 @@
 ﻿using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using buckstore.orders.service.domain.SeedWork;
 using buckstore.orders.service.domain.Exceptions;
 using buckstore.orders.service.application.Commands;
 using buckstore.orders.service.domain.Aggregates.OrderAggregate;
-using Microsoft.Extensions.Logging;
+using buckstore.orders.service.application.IntegrationEvents.External;
 
 namespace buckstore.orders.service.application.CommandHandlers
 {
@@ -25,13 +26,13 @@ namespace buckstore.orders.service.application.CommandHandlers
         {
             if (!request.IsValid())
             {
-                // criar validações
                 NotifyValidationErrors(request);
                 return false;
             }
 
             var address = new Address(request.Street, request.ZipCode, request.District, request.City, request.State);
-            var order = new Order(request.UserId, request.UserName, request.Cpf, address, request.PaymentMethodId);
+            var order = new Order(request.UserId, request.UserName, request.Cpf, address, request.PaymentMethodId,
+                request.CardAlias, request.CardNumber, request.CardSecurityNumber, request.CardExpiration, request.CardHolderName );
 
             foreach (var item in request.OrderItems)
             {
@@ -46,10 +47,10 @@ namespace buckstore.orders.service.application.CommandHandlers
             }
             
             _logger.LogInformation($"Nova ordem inserida ao banco {order.Id}");
-            // TODO
-            //var integrationEvent = new OrderCreatedIntegrationEvent(order.Id, order.OrderItems);
-            // esse evento deve publicar o para a api de produtos para verificar a disponibilidade de stock mudar stock
-            // receber resposta da api de produtos para mudar o status para pagamento
+
+            var orderCreatedEvent = new OrderCreatedIntegrationEvent(request.OrderItems, order.Id);
+            await _bus.Publish(orderCreatedEvent, cancellationToken);
+            
             return true;
         }
     }

@@ -46,6 +46,12 @@ namespace buckstore.orders.service.domain.Aggregates.OrderAggregate
             _orderItems.Add(orderItem);
             CalculateGoods(price);
         }
+
+        public void ChangeStatus(OrderStatus status)
+        {
+            OrderStatus = status;
+            _orderStatusId = status.Id;
+        }
         // TODO Criar domain event para quando o pedido mudar de status, Cancelado ou aceito
         void CalculateGoods(decimal price)
         {
