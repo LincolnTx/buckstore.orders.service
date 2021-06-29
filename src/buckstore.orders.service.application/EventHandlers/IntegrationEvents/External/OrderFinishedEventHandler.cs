@@ -1,8 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using buckstore.orders.service.application.IntegrationEvents;
+using buckstore.orders.service.application.IntegrationEvents.External;
 
-namespace buckstore.orders.service.application.EventHandlers.IntegrationEvents
+namespace buckstore.orders.service.application.EventHandlers.IntegrationEvents.External
 {
     public class OrderFinishedEventHandler : EventHandler<OrderFinishedIntegrationEvent>
     {

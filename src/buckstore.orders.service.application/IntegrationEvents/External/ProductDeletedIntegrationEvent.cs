@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace buckstore.orders.service.application.IntegrationEvents
+namespace buckstore.orders.service.application.IntegrationEvents.External
 {
     public class ProductDeletedIntegrationEvent : IntegrationEvent
     {

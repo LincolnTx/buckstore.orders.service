@@ -17,6 +17,8 @@
     
     <ItemGroup>
       <Folder Include="EventHandlers\DomainEvents\OrderCreated" />
+      <Folder Include="EventHandlers\IntegrationEvents\Internal" />
+      <Folder Include="IntegrationEvents\Internal" />
     </ItemGroup>
 
 </Project>
