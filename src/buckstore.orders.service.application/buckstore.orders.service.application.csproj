@@ -6,12 +6,17 @@
 
     <ItemGroup>
         <PackageReference Include="AutoMapper" Version="9.0.0" />
+        <PackageReference Include="CreditCardValidator" Version="2.0.1" />
         <PackageReference Include="FluentValidation" Version="8.6.2" />
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.5" />
     </ItemGroup>
     
     <ItemGroup>
       <ProjectReference Include="..\buckstore.orders.service.domain\buckstore.orders.service.domain.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="EventHandlers\DomainEvents\OrderCreated" />
     </ItemGroup>
 
 </Project>

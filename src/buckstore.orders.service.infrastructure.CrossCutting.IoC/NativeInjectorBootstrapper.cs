@@ -4,7 +4,13 @@ using Microsoft.Extensions.DependencyInjection;
 using buckstore.orders.service.domain.Exceptions;
 using buckstore.orders.service.application.IntegrationEvents;
 using buckstore.orders.service.application.Adapters.MessageBroker;
+using buckstore.orders.service.domain.Aggregates.BuyerAggregate;
+using buckstore.orders.service.domain.Aggregates.OrderAggregate;
+using buckstore.orders.service.domain.SeedWork;
 using buckstore.orders.service.infrastructure.bus.MessageBroker.Kafka.Producers;
+using buckstore.orders.service.infrastructure.Data.Repositories.BuyerRepository;
+using buckstore.orders.service.infrastructure.Data.Repositories.OrderRepository;
+using buckstore.orders.service.infrastructure.Data.UnitOfWork;
 using buckstore.orders.service.infrastructure.environment.Configurations;
 
 namespace buckstore.orders.service.infrastructure.CrossCutting.IoC
@@ -21,8 +27,9 @@ namespace buckstore.orders.service.infrastructure.CrossCutting.IoC
 
 		public static void RegisterData(IServiceCollection services)
 		{
-			// here goes your repository injection
-			// sample: services.AddScoped<IUserRepository, UserRepository>();
+			services.AddScoped<IUnitOfWork, UnitOfWork>();
+			services.AddScoped<IOrderRepository, OrderRepository>();
+			services.AddScoped<IBuyerRepository, BuyerRepository>();
 		}
 
 		public static void RegisterMediatR(IServiceCollection services)

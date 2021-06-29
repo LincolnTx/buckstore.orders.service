@@ -2,7 +2,7 @@
 
 namespace buckstore.orders.service.domain.Aggregates.OrderAggregate
 {
-    public interface IDeliveryRepository : IRepository<Order>
+    public interface IOrderRepository : IRepository<Order>
     {
         
     }
