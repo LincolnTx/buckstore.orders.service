@@ -1,12 +1,25 @@
-﻿namespace buckstore.orders.service.domain.Events
+﻿using System;
+
+namespace buckstore.orders.service.domain.Events
 {
     public class OrderCreatedDomainEvent : Event
     {
         public string Cpf { get; set; }
+        public string CardNumber { get; set; }
+        public DateTime CardExpiration { get; set; }
+        public string Alias { get; set; }
+        public string SecurityNumber { get; set; }
+        public string CardHolderName { get; set; }
 
-        public OrderCreatedDomainEvent(string cpf)
+        
+        public OrderCreatedDomainEvent(string cpf, string cardNumber, DateTime cardExpiration, string @alias, string securityNumber, string cardHolderName)
         {
             Cpf = cpf;
+            CardNumber = cardNumber;
+            CardExpiration = cardExpiration;
+            Alias = alias;
+            SecurityNumber = securityNumber;
+            CardHolderName = cardHolderName;
         }
     }
 }

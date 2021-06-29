@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using buckstore.orders.service.application.Validations;
 using MediatR;
 
 namespace buckstore.orders.service.application.Commands
@@ -16,6 +17,7 @@ namespace buckstore.orders.service.application.Commands
         public string City { get; private set; }
         public string State { get; private set; }
         public string CardNumber { get; set; }
+        public string CardAlias { get; set; }
         public string CardHolderName  { get; set; }
         public DateTime CardExpiration  { get; set; }
         public string CardSecurityNumber { get; set; }
@@ -29,7 +31,9 @@ namespace buckstore.orders.service.application.Commands
         
         public override bool IsValid()
         {
-            throw new System.NotImplementedException();
+            ValidationResult = new NewOrderValidations().Validate(this);
+
+            return ValidationResult.IsValid;
         }
     }
 
