@@ -11,7 +11,7 @@ using buckstore.orders.service.infrastructure.bus.MessageBroker.Kafka.Producers;
 using buckstore.orders.service.infrastructure.Data.Repositories.BuyerRepository;
 using buckstore.orders.service.infrastructure.Data.Repositories.OrderRepository;
 using buckstore.orders.service.infrastructure.Data.UnitOfWork;
-using buckstore.orders.service.infrastructure.environment.Configurations;
+using buckstore.orders.service.infrastructure.environment.Configuration;
 
 namespace buckstore.orders.service.infrastructure.CrossCutting.IoC
 {

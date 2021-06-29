@@ -27,11 +27,10 @@
         "ConnectionString": "Server=127.0.0.1;Port=5432;Database=buckstore-development;User Id=postgres;Password=polivel@12;MaxPoolSize=5;Pooling=true;SearchPath=orders;",
         "KafkaConfiguration__ConnectionString": "localhost:9092",
         "KafkaConfiguration__Group": "buckstore",
-        "KafkaConfiguration__ManagerToOrdersCreate": "manager-to-orders-create",
-        "KafkaConfiguration__ManagerToOrdersUpdate": "manager-to-orders-update",
-        "KafkaConfiguration__ManagerToOrdersDelete": "manager-to-orders-delete",
         "KafkaConfiguration__OrdersToManager": "orders-to-manager",
-        "KafkaConfiguration__OrdersToProducts": "order-to-products"
+        "KafkaConfiguration__OrdersToProductsStockConfirmation": "order-to-products-stock-confirmation",
+        "KafkaConfiguration__ProductsStockResponseSuccess": "product-to-order-stock-success",
+        "KafkaConfiguration__ProductsStockResponseFail": "product-to-order-stock-fail"
       }
     }
   }

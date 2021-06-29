@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using buckstore.orders.service.application.Validations;
 using MediatR;
+using System.Collections.Generic;
+using buckstore.orders.service.application.DTOs;
+using buckstore.orders.service.application.Validations;
 
 namespace buckstore.orders.service.application.Commands
 {
@@ -35,13 +36,5 @@ namespace buckstore.orders.service.application.Commands
 
             return ValidationResult.IsValid;
         }
-    }
-
-    public class OrderItemDto
-    {
-        public Guid ProductId { get; set; }
-        public string ProductName { get; set; }
-        public decimal Price { get; set; }
-        public int Quantity { get; set; }
     }
 }

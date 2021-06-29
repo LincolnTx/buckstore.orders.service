@@ -5,7 +5,7 @@ using MassTransit.KafkaIntegration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using buckstore.orders.service.application.IntegrationEvents.External;
-using buckstore.orders.service.infrastructure.environment.Configurations;
+using buckstore.orders.service.infrastructure.environment.Configuration;
 using buckstore.orders.service.infrastructure.bus.MessageBroker.Kafka.Consumers;
 
 namespace buckstore.orders.service.infrastructure.CrossCutting.IoC.Configurations
@@ -33,38 +33,27 @@ namespace buckstore.orders.service.infrastructure.CrossCutting.IoC.Configuration
                     {
                         k.Host(_kafkaConfiguration.ConnectionString);
                         
-                        k.TopicEndpoint<ProductCreatedIntegrationEvent>(_kafkaConfiguration.ManagerToOrdersCreate, _kafkaConfiguration.Group,
-                            e =>
-                            {
-                                e.ConfigureConsumer<ProductCreatedConsumer>(ctx);
-                                e.CreateIfMissing(options =>
-                                {
-                                    options.NumPartitions = 3;
-                                    options.ReplicationFactor = 1;
-                                });
-                            });
-                        
-                        k.TopicEndpoint<ProductUpdatedIntegrationEvent>(_kafkaConfiguration.ManagerToOrdersUpdate, _kafkaConfiguration.Group,
-                            e =>
-                            {
-                                e.ConfigureConsumer<ProductUpdatedConsumer>(ctx);
-                                e.CreateIfMissing(options =>
-                                {
-                                    options.NumPartitions = 3;
-                                    options.ReplicationFactor = 1;
-                                });
-                            });
-                        
-                        k.TopicEndpoint<ProductDeletedIntegrationEvent>(_kafkaConfiguration.ManagerToOrdersDelete, _kafkaConfiguration.Group,
-                            e =>
-                            {
-                                e.ConfigureConsumer<ProductDeletedConsumer>(ctx);
-                                e.CreateIfMissing(options =>
-                                {
-                                    options.NumPartitions = 3;
-                                    options.ReplicationFactor = 1;
-                                });
-                            });
+                       k.TopicEndpoint<StockConfirmationIntegrationEvent>(_kafkaConfiguration.ProductsStockResponseSuccess, _kafkaConfiguration.Group,
+                           e =>
+                           {
+                               e.ConfigureConsumer<StockConfirmationConsumer>(ctx);
+                               e.CreateIfMissing(options =>
+                               {
+                                   options.NumPartitions = 3;
+                                   options.ReplicationFactor = 1;
+                               });
+                           });
+                       
+                       k.TopicEndpoint<StockConfirmationFailConsumer>(_kafkaConfiguration.ProductsStockResponseFail, _kafkaConfiguration.Group,
+                           e =>
+                           {
+                               e.ConfigureConsumer<StockConfirmationFailConsumer>(ctx);
+                               e.CreateIfMissing(options =>
+                               {
+                                   options.NumPartitions = 3;
+                                   options.ReplicationFactor = 1;
+                               });
+                           });
                     });
                 });
             });
@@ -74,15 +63,14 @@ namespace buckstore.orders.service.infrastructure.CrossCutting.IoC.Configuration
         
         static void AddConsumer(this IRegistrationConfigurator rider)
         {
-            rider.AddConsumer<ProductCreatedConsumer>();
-            rider.AddConsumer<ProductUpdatedConsumer>();
-            rider.AddConsumer<ProductDeletedConsumer>();
+            rider.AddConsumer<StockConfirmationConsumer>();
+            rider.AddConsumer<StockConfirmationFailConsumer>();
         }
 
         static void AddProducers(this IRiderRegistrationConfigurator rider)
         {
-            rider.AddProducer<OrderFinishedIntegrationEvent>(_kafkaConfiguration.OrdersToProducts);
             rider.AddProducer<OrderToManagerIntegrationEvent>(_kafkaConfiguration.OrdersToManager);
+            rider.AddProducer<OrderCreatedIntegrationEvent>(_kafkaConfiguration.OrdersToProductsStockConfirmation);
         }
     }
 }
