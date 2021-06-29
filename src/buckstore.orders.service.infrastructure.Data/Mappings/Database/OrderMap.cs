@@ -31,8 +31,7 @@ namespace buckstore.orders.service.infrastructure.Data.Mappings.Database
 
             builder.Property<Guid>("_paymentMethodId")
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
-                .HasColumnName("PaymentMethodId")
-                .IsRequired(false);
+                .HasColumnName("PaymentMethodId");
             
             builder.Property(order => order.Value)
                 .HasField("_value")
