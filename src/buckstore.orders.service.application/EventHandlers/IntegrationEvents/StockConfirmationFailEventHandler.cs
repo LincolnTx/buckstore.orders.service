@@ -2,8 +2,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using buckstore.orders.service.domain.SeedWork;
-using buckstore.orders.service.domain.Aggregates.OrderAggregate;
 using buckstore.orders.service.application.IntegrationEvents;
+using buckstore.orders.service.domain.Aggregates.OrderAggregate;
 
 namespace buckstore.orders.service.application.EventHandlers.IntegrationEvents
 {
@@ -24,7 +24,7 @@ namespace buckstore.orders.service.application.EventHandlers.IntegrationEvents
 
             if (order == null)
             {
-                throw new ArgumentNullException(nameof(order), $"Ordem não infromada não existente {notification.OrderId}, para stock fail");
+                throw new ArgumentNullException(nameof(order), $"Ordem informada não existente {notification.OrderId}, para stock fail");
             }
             
             order.ChangeStatus(OrderStatus.Cancelled);
