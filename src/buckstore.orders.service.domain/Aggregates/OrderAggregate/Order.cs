@@ -24,7 +24,7 @@ namespace buckstore.orders.service.domain.Aggregates.OrderAggregate
         {
             _buyerid = buyerId;
             _paymentMethodId = paymentMethodId;
-            _orderStatusId = OrderStatus.Submitted.Id;
+            _orderStatusId = OrderStatus.StockConfirmation.Id;
             _orderDate = DateTime.Now;
             Address = address;
             AddDomainEvent(new OrderCreatedDomainEvent(cpf, cardNumber, cardExpiration, alias, securityNumber, cardHolderName));

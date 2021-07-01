@@ -3,9 +3,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using buckstore.orders.service.domain.SeedWork;
 using buckstore.orders.service.domain.Aggregates.OrderAggregate;
-using buckstore.orders.service.application.IntegrationEvents.External;
+using buckstore.orders.service.application.IntegrationEvents;
 
-namespace buckstore.orders.service.application.EventHandlers.IntegrationEvents.External
+namespace buckstore.orders.service.application.EventHandlers.IntegrationEvents
 {
     public class StockConfirmationFailEventHandler : EventHandler<StockConfimationFailIntegrationEvent>
     {

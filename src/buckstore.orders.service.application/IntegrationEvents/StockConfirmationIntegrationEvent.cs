@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace buckstore.orders.service.application.IntegrationEvents.External
+namespace buckstore.orders.service.application.IntegrationEvents
 {
     public class StockConfirmationIntegrationEvent : IntegrationEvent
     {

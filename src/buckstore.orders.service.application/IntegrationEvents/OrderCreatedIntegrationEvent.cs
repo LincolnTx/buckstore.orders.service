@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using buckstore.orders.service.application.DTOs;
 
-namespace buckstore.orders.service.application.IntegrationEvents.External
+namespace buckstore.orders.service.application.IntegrationEvents
 {
     public class OrderCreatedIntegrationEvent : IntegrationEvent
     {

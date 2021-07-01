@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using buckstore.orders.service.domain.Exceptions;
-using buckstore.orders.service.application.IntegrationEvents.External;
+using buckstore.orders.service.application.IntegrationEvents;
 using buckstore.orders.service.application.Adapters.MessageBroker;
 using buckstore.orders.service.domain.Aggregates.BuyerAggregate;
 using buckstore.orders.service.domain.Aggregates.OrderAggregate;

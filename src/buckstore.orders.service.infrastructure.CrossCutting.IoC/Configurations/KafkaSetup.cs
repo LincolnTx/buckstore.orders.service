@@ -4,7 +4,7 @@ using MassTransit.Registration;
 using MassTransit.KafkaIntegration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using buckstore.orders.service.application.IntegrationEvents.External;
+using buckstore.orders.service.application.IntegrationEvents;
 using buckstore.orders.service.infrastructure.environment.Configuration;
 using buckstore.orders.service.infrastructure.bus.MessageBroker.Kafka.Consumers;
 

@@ -5,8 +5,8 @@ using Microsoft.Extensions.Logging;
 using buckstore.orders.service.domain.SeedWork;
 using buckstore.orders.service.domain.Exceptions;
 using buckstore.orders.service.application.Commands;
+using buckstore.orders.service.application.IntegrationEvents;
 using buckstore.orders.service.domain.Aggregates.OrderAggregate;
-using buckstore.orders.service.application.IntegrationEvents.External;
 
 namespace buckstore.orders.service.application.CommandHandlers
 {
