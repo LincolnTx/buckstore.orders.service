@@ -18,7 +18,7 @@ namespace buckstore.orders.service.application.EventHandlers.IntegrationEvents
             _uow = uow;
         }
 
-        public async override Task Handle(StockConfirmationIntegrationEvent notification, CancellationToken cancellationToken)
+        public override async Task Handle(StockConfirmationIntegrationEvent notification, CancellationToken cancellationToken)
         {
             var order = await _orderRepository.FindById(notification.OrderId);
 

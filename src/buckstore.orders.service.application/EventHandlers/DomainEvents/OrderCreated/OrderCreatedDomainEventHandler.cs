@@ -16,6 +16,7 @@ namespace buckstore.orders.service.application.EventHandlers.DomainEvents.OrderC
         }
 
         public async Task Handle(OrderCreatedDomainEvent notification, CancellationToken cancellationToken)
+        
         {
             var buyer = await _buyerRepository.GetBuyerByCpf(notification.Cpf);
 

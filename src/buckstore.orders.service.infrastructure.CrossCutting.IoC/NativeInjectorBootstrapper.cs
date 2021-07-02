@@ -12,6 +12,7 @@ using buckstore.orders.service.infrastructure.Data.Repositories.BuyerRepository;
 using buckstore.orders.service.infrastructure.Data.Repositories.OrderRepository;
 using buckstore.orders.service.infrastructure.Data.UnitOfWork;
 using buckstore.orders.service.infrastructure.environment.Configuration;
+using buckstore.orders.service.infrastructure.proxy.globalPayments.Adapters;
 
 namespace buckstore.orders.service.infrastructure.CrossCutting.IoC
 {
@@ -48,6 +49,11 @@ namespace buckstore.orders.service.infrastructure.CrossCutting.IoC
 		public static void RegisterEnvironment(IServiceCollection services, IConfiguration configuration)
 		{
 			services.AddSingleton(configuration.GetSection("KafkaConfiguration").Get<KafkaConfiguration>());
+		}
+		public static void RegistersApplicationServices(IServiceCollection services)
+		{
+			// configurar CB olhando da BFF
+			services.AddHttpClient<IPaymentService, GlobalPaymentsService>();
 		}
 	}
 }

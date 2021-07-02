@@ -69,6 +69,7 @@ namespace buckstore.orders.service.infrastructure.CrossCutting.IoC.Configuration
 
         static void AddProducers(this IRiderRegistrationConfigurator rider)
         {
+            rider.AddProducer<OrderFinishedIntegrationEvent>("order-finished"); // talvez deletar
             rider.AddProducer<OrderToManagerIntegrationEvent>(_kafkaConfiguration.OrdersToManager);
             rider.AddProducer<OrderCreatedIntegrationEvent>(_kafkaConfiguration.OrdersToProductsStockConfirmation);
         }
