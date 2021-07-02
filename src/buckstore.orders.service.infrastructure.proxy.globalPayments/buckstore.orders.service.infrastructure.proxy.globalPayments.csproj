@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\buckstore.orders.service.application\buckstore.orders.service.application.csproj" />
+      <ProjectReference Include="..\buckstore.orders.service.infrastructure.common\buckstore.orders.service.infrastructure.common.csproj" />
+    </ItemGroup>
+
+</Project>
