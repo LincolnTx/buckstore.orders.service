@@ -18,16 +18,19 @@ namespace buckstore.orders.service.domain.Aggregates.OrderAggregate
         public decimal Value => _value;
         private DateTime _orderDate;
         private Guid _paymentMethodId;
+        public Guid PaymentMethodId => _paymentMethodId;
 
         public Order(Guid buyerId, string userName, string cpf,  Address address, Guid paymentMethodId,
             string alias, string cardNumber, string securityNumber, DateTime cardExpiration, string cardHolderName)
         {
             _buyerid = buyerId;
-            _paymentMethodId = paymentMethodId;
             _orderStatusId = OrderStatus.StockConfirmation.Id;
             _orderDate = DateTime.Now;
             Address = address;
             AddDomainEvent(new OrderCreatedDomainEvent(cpf, cardNumber, cardExpiration, alias, securityNumber, cardHolderName));
+
+            var isValid = Guid.TryParse(paymentMethodId.ToString(), out var validId);
+            _paymentMethodId = isValid ? validId : Guid.NewGuid();
         }
 
         protected Order()
