@@ -9,4 +9,8 @@
       <ProjectReference Include="..\buckstore.orders.service.infrastructure.common\buckstore.orders.service.infrastructure.common.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="GlobalPayments.Api" Version="1.7.33" />
+    </ItemGroup>
+
 </Project>
