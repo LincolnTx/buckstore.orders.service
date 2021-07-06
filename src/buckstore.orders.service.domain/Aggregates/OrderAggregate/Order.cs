@@ -23,6 +23,7 @@ namespace buckstore.orders.service.domain.Aggregates.OrderAggregate
         public Order(Guid buyerId, string userName, string cpf,  Address address, Guid paymentMethodId,
             string alias, string cardNumber, string securityNumber, DateTime cardExpiration, string cardHolderName)
         {
+            _orderItems = new List<OrderItem>();
             _buyerid = buyerId;
             _orderStatusId = OrderStatus.StockConfirmation.Id;
             _orderDate = DateTime.Now;
@@ -30,7 +31,7 @@ namespace buckstore.orders.service.domain.Aggregates.OrderAggregate
             AddDomainEvent(new OrderCreatedDomainEvent(cpf, cardNumber, cardExpiration, alias, securityNumber, cardHolderName));
 
             var isValid = Guid.TryParse(paymentMethodId.ToString(), out var validId);
-            _paymentMethodId = isValid ? validId : Guid.NewGuid();
+            _paymentMethodId = isValid && paymentMethodId != Guid.Empty? validId : Guid.NewGuid();
         }
 
         protected Order()
@@ -47,7 +48,7 @@ namespace buckstore.orders.service.domain.Aggregates.OrderAggregate
 
             var orderItem = new OrderItem(productId, productName, quantity, price);
             _orderItems.Add(orderItem);
-            CalculateGoods(price);
+            CalculateGoods(price * quantity);
         }
 
         public void ChangeStatus(OrderStatus status)

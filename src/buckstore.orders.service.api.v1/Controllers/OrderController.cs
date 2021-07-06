@@ -17,6 +17,7 @@ namespace buckstore.orders.service.api.v1.Controllers
         [HttpPost]
         public async Task<IActionResult> PostOrder([FromBody] NewOrderCommand newOrder)
         {
+            // pegar id do usuario do token
             var response = await _bus.Send(newOrder);
 
             return Response(201, response);

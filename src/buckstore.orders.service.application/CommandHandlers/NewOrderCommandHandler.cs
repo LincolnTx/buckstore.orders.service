@@ -13,13 +13,15 @@ namespace buckstore.orders.service.application.CommandHandlers
     public class NewOrderCommandHandler : CommandHandler, IRequestHandler<NewOrderCommand, bool>
     {
         private readonly ILogger<NewOrderCommandHandler> _logger;
+        private readonly IOrderRepository _orderRepository;
         public NewOrderCommandHandler(IUnitOfWork uow, 
             IMediator bus, 
             INotificationHandler<ExceptionNotification> notifications,
-            ILogger<NewOrderCommandHandler> logger) 
+            ILogger<NewOrderCommandHandler> logger, IOrderRepository orderRepository) 
             : base(uow, bus, notifications)
         {
             _logger = logger;
+            _orderRepository = orderRepository;
         }
 
         public async Task<bool> Handle(NewOrderCommand request, CancellationToken cancellationToken)
@@ -38,6 +40,7 @@ namespace buckstore.orders.service.application.CommandHandlers
             {
                 order.AddDeliveryItem(item.ProductId, item.ProductName, item.Quantity, item.Price);
             }
+            _orderRepository.Add(order);
 
             if (!await Commit())
             {
