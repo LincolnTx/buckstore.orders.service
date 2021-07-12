@@ -1,5 +1,6 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
+using GlobalPayments.Api.Entities;
+using Microsoft.Extensions.Logging;
 using GlobalPayments.Api.PaymentMethods;
 using buckstore.orders.service.application.DTOs;
 using buckstore.orders.service.infrastructure.common.Proxy.Core;
@@ -9,12 +10,16 @@ namespace buckstore.orders.service.infrastructure.proxy.globalPayments.Adapters
 {
     public class GlobalPaymentsService : WebApiBaseRequest, IPaymentService
     {
-        public GlobalPaymentsService(HttpClient httpClient) : base(httpClient)
+        private readonly ILogger<GlobalPaymentsService> _logger;
+        public GlobalPaymentsService(HttpClient httpClient, ILogger<GlobalPaymentsService> logger) 
+            : base(httpClient)
         {
+            _logger = logger;
         }
         
-        public void CreditCardPay(CreditCarPaymentDto paymentDtoInformation)
+        public bool CreditCardPay(CreditCarPaymentDto paymentDtoInformation)
         {
+            bool validTransaction = false;
             var paymentCard = new CreditCardData
             {
                 Number = paymentDtoInformation.CardNumber,
@@ -32,12 +37,20 @@ namespace buckstore.orders.service.infrastructure.proxy.globalPayments.Adapters
 
                 var result = response.ResponseCode;
                 var message = response.ResponseMessage;
+
+               validTransaction =  result == "00";
+
             }
-            catch (Exception e)
+            catch (BuilderException  e)
             {
-                Console.WriteLine(e);
-                throw;
+                _logger.LogError("Erro ao buildar método de pagamento {0}", e.Message);
             }
+            catch (UnsupportedTransactionException e)
+            {
+                _logger.LogError("Erro de transção com a API de pagamentos {0}", e.Message);
+            }
+
+            return validTransaction;
         }
     }
 }

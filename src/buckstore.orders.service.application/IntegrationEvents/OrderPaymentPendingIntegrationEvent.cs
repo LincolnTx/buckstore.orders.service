@@ -1,7 +1,7 @@
 ﻿using System;
 using buckstore.orders.service.application.IntegrationEvents;
 
-namespace buckstore.orders.service.application.EventHandlers.IntegrationEvents
+namespace buckstore.orders.service.application.IntegrationEvents
 {
     public class OrderPaymentPendingIntegrationEvent : IntegrationEvent
     {

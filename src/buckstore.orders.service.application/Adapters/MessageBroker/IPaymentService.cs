@@ -4,6 +4,6 @@ namespace buckstore.orders.service.application.Adapters.MessageBroker
 {
     public interface IPaymentService
     {
-        void CreditCardPay(CreditCarPaymentDto paymentDtoInformation);
+        bool CreditCardPay(CreditCarPaymentDto paymentDtoInformation);
     }
 }

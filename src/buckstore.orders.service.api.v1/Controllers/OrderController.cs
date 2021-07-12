@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using buckstore.orders.service.domain.Exceptions;
@@ -20,6 +21,15 @@ namespace buckstore.orders.service.api.v1.Controllers
             // pegar id do usuario do token
             var response = await _bus.Send(newOrder);
 
+            return Response(201, response);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetOrder(Guid orderId)
+        {
+            // mudar para usar query
+            var response = await _bus.Send(new GetOrderCommand{ OrderId =  orderId});
+            
             return Response(201, response);
         }
     }
