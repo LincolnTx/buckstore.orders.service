@@ -7,10 +7,14 @@ namespace buckstore.orders.service.domain.Aggregates.BuyerAggregate
     public class PaymentMethod :Entity
     {
         private string _cardNumber;
+        public string CardNumber => _cardNumber;
         private string _alias;
         private string _securityNumber;
+        public string Cvv => _securityNumber;
         private string _cardHolderName;
+        public string CardHolderName => _cardHolderName;
         private DateTime _expiration;
+        public DateTime Expiration => _expiration;
         public Guid BuyerId { get; private set; }
         
         protected PaymentMethod() { }

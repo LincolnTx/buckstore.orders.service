@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using buckstore.orders.service.infrastructure.Data.Context;
 using buckstore.orders.service.domain.Aggregates.OrderAggregate;
+using buckstore.orders.service.domain.Aggregates.BuyerAggregate;
 
 namespace buckstore.orders.service.infrastructure.Data.Repositories.OrderRepository
 {
@@ -15,5 +18,12 @@ namespace buckstore.orders.service.infrastructure.Data.Repositories.OrderReposit
         {
             return await _dbSet.FindAsync(id);
         }
+
+        public async Task<PaymentMethod> FindPaymentMethod(Guid orderId)
+        {
+            var order = await _dbSet.FindAsync(orderId);
+            return await _applicationDbContext.Set<PaymentMethod>().Where(p => p.Id == order.PaymentMethodId).FirstOrDefaultAsync();
+        }
+        
     }
 }

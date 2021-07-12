@@ -3,9 +3,9 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 using buckstore.orders.service.domain.SeedWork;
+using buckstore.orders.service.domain.Exceptions;
 using buckstore.orders.service.application.IntegrationEvents;
 using buckstore.orders.service.domain.Aggregates.OrderAggregate;
-using buckstore.orders.service.domain.Exceptions;
 
 namespace buckstore.orders.service.application.EventHandlers.IntegrationEvents
 {
@@ -39,8 +39,12 @@ namespace buckstore.orders.service.application.EventHandlers.IntegrationEvents
                 await Task.FromCanceled(cancellationToken);
             }
 
-            // enviar evento OrderPaymentPendingIntegrationEvent
-            // verificar como pegar o método de pagamento de uma ordem
+            var payment = await _orderRepository.FindPaymentMethod(notification.OrderId);
+            var paymentIntegrationEvent = new OrderPaymentPendingIntegrationEvent(notification.OrderId, payment.CardNumber, 
+                payment.CardHolderName, payment.Cvv, 
+                payment.Expiration, order.Value);
+
+            await _bus.Publish(paymentIntegrationEvent, cancellationToken);
         }
     }
 }
