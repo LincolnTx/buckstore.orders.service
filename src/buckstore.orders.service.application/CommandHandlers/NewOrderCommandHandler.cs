@@ -33,8 +33,8 @@ namespace buckstore.orders.service.application.CommandHandlers
             }
 
             var address = new Address(request.Street, request.ZipCode, request.District, request.City, request.State);
-            var order = new Order(request.UserId, request.UserName, request.Cpf, address, request.PaymentMethodId,
-                request.CardAlias, request.CardNumber, request.CardSecurityNumber, request.CardExpiration, request.CardHolderName );
+            var order = new Order(request.UserId, request.UserName, request.Cpf, address,
+                request.CardAlias, request.CardNumber, request.CardSecurityNumber, request.CardExpiration, request.CardHolderName);
 
             foreach (var item in request.OrderItems)
             {
@@ -42,7 +42,7 @@ namespace buckstore.orders.service.application.CommandHandlers
             }
             _orderRepository.Add(order);
 
-            if (!await Commit())
+            if (await _orderRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken))
             {
                 await _bus.Publish(new ExceptionNotification("001", "Erro ao adicionar uma nova ordem"),
                     cancellationToken);

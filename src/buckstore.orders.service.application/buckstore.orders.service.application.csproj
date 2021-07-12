@@ -14,9 +14,5 @@
     <ItemGroup>
       <ProjectReference Include="..\buckstore.orders.service.domain\buckstore.orders.service.domain.csproj" />
     </ItemGroup>
-    
-    <ItemGroup>
-      <Folder Include="EventHandlers\DomainEvents\OrderCreated" />
-    </ItemGroup>
 
 </Project>

@@ -26,8 +26,11 @@ namespace buckstore.orders.service.infrastructure.Data.Mappings.Database
 				.WithOne()
 				.HasForeignKey("BuyerId")
 				.OnDelete(DeleteBehavior.Cascade);
+
+			var navigation = builder.Metadata.FindNavigation(nameof(Buyer.PaymentMethods));
 			
-			
+			navigation.SetPropertyAccessMode(PropertyAccessMode.Field);
+
 		}
 	}
 }

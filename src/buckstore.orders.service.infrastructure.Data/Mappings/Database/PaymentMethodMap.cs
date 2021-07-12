@@ -1,7 +1,7 @@
 ﻿using System;
-using buckstore.orders.service.domain.Aggregates.BuyerAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using buckstore.orders.service.domain.Aggregates.BuyerAggregate;
 
 namespace buckstore.orders.service.infrastructure.Data.Mappings.Database
 {
@@ -22,7 +22,7 @@ namespace buckstore.orders.service.infrastructure.Data.Mappings.Database
                 .HasMaxLength(200)
                 .IsRequired();
 
-            builder.Property<string>("alias")
+            builder.Property<string>("_alias")
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
                 .HasColumnName("Alias")
                 .HasMaxLength(200)
@@ -45,7 +45,6 @@ namespace buckstore.orders.service.infrastructure.Data.Mappings.Database
                 .HasColumnName("SecurityNumber")
                 .HasMaxLength(5)
                 .IsRequired();
-
         }
     }
 }

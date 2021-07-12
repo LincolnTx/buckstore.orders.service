@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using buckstore.orders.service.domain.Events;
 using buckstore.orders.service.domain.SeedWork;
 
 namespace buckstore.orders.service.domain.Aggregates.BuyerAggregate
@@ -23,18 +24,19 @@ namespace buckstore.orders.service.domain.Aggregates.BuyerAggregate
             _paymentMethods = new List<PaymentMethod>();
         }
 
-        public bool VerifyPaymentMethod(string cardNumber, DateTime expiration)
+        public void VerifyAndAddPaymentMethod(string alias, string cardNumber, string securityNumber, string cardHolderName,
+            DateTime expiration, Guid orderId)
         {
             var existingPayment = _paymentMethods.SingleOrDefault(p => p.IsEqualTo(cardNumber, expiration));
 
-            return existingPayment != null;
-        }
-
-        public void AddPaymentMethod(string alias, string cardNumber, string securityNumber, string cardHolderName,
-            DateTime expiration)
-        {
+            if (existingPayment != null)
+            {
+                AddDomainEvent(new BuyerAndPaymentMethodVerifiedDomainEvent(existingPayment, orderId));
+                return;
+            }
             var payment = new PaymentMethod(alias, cardNumber, securityNumber, cardHolderName, expiration);
             _paymentMethods.Add(payment);
+            AddDomainEvent(new BuyerAndPaymentMethodVerifiedDomainEvent(payment, orderId));
         }
     }
 }

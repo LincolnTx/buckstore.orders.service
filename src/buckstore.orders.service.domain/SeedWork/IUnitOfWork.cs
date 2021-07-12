@@ -12,5 +12,6 @@ namespace buckstore.orders.service.domain.SeedWork
 	public interface IUnitOfWorkIntegration
 	{
 		Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));
+		Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default(CancellationToken));
 	}
 }
