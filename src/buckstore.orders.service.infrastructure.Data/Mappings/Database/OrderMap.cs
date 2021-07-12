@@ -14,6 +14,8 @@ namespace buckstore.orders.service.infrastructure.Data.Mappings.Database
             
             builder.HasKey(order => order.Id);
 
+            builder.Ignore(o => o.DomainEvents);
+
             builder.Property<Guid>("_buyerid")
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
                 .HasColumnName("BuyerId")
@@ -29,8 +31,7 @@ namespace buckstore.orders.service.infrastructure.Data.Mappings.Database
                 .HasColumnName("OrderStatusId")
                 .IsRequired();
 
-            builder.Property(order => order.PaymentMethodId)
-                .HasField("_paymentMethodId")
+            builder.Property<Guid>("_paymentMethodId")
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
                 .HasColumnName("PaymentMethodId");
             
@@ -51,9 +52,9 @@ namespace buckstore.orders.service.infrastructure.Data.Mappings.Database
                 .IsRequired()
                 .HasForeignKey("_orderStatusId")
                 .OnDelete(DeleteBehavior.Restrict);
-            
-            builder.HasMany(order => order.OrderItems)
-                .WithOne();
+
+            var navigation = builder.Metadata.FindNavigation(nameof(Order.OrderItems));
+            navigation.SetPropertyAccessMode(PropertyAccessMode.Field);
 
             builder.HasOne<PaymentMethod>()
                 .WithMany()

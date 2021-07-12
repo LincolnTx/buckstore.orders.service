@@ -15,6 +15,11 @@ namespace buckstore.orders.service.infrastructure.Data.Repositories
 			_dbSet = applicationDbContext.Set<TEntity>();
 		}
 
+		public IUnitOfWorkIntegration UnitOfWork
+		{
+			get { return _applicationDbContext; }
+		}
+
 		public void Add(TEntity obj)
 		{
 			_applicationDbContext.Add(obj);

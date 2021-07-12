@@ -1,6 +1,6 @@
 ﻿using System;
-using buckstore.orders.service.domain.Exceptions;
 using buckstore.orders.service.domain.SeedWork;
+using buckstore.orders.service.domain.Exceptions;
 
 namespace buckstore.orders.service.domain.Aggregates.BuyerAggregate
 {

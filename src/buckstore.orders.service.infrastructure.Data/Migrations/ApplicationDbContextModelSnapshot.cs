@@ -91,10 +91,6 @@ namespace buckstore.orders.service.infrastructure.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("PaymentMethodId")
-                        .HasColumnName("PaymentMethodId")
-                        .HasColumnType("uuid");
-
                     b.Property<decimal>("Value")
                         .HasColumnName("value")
                         .HasColumnType("numeric");
@@ -112,6 +108,7 @@ namespace buckstore.orders.service.infrastructure.Data.Migrations
                         .HasColumnType("integer");
 
                     b.Property<Guid>("_paymentMethodId")
+                        .HasColumnName("PaymentMethodId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");

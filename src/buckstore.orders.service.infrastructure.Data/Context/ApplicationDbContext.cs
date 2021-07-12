@@ -2,13 +2,14 @@
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using buckstore.orders.service.domain.SeedWork;
 using buckstore.orders.service.infrastructure.Data.Mappings.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace buckstore.orders.service.infrastructure.Data.Context
 {
-	public class ApplicationDbContext : DbContext
+	public class ApplicationDbContext : DbContext, IUnitOfWorkIntegration
 	{
 
 		private IDbContextTransaction _currentTransaction;

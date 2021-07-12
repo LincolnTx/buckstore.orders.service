@@ -24,6 +24,7 @@ namespace buckstore.orders.service.infrastructure.CrossCutting.IoC
 			RegisterMediatR(services);
 			RegisterProducers(services);
 			RegisterEnvironment(services, configuration);
+			RegistersApplicationServices(services);
 		}
 
 		public static void RegisterData(IServiceCollection services)
