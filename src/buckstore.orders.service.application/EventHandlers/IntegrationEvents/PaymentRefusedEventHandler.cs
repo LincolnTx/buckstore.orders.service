@@ -6,25 +6,25 @@ using buckstore.orders.service.domain.Aggregates.OrderAggregate;
 
 namespace buckstore.orders.service.application.EventHandlers.IntegrationEvents
 {
-    public class OrderFinishedEventHandler : EventHandler<OrderFinishedIntegrationEvent>
+    public class PaymentRefusedEventHandler : EventHandler<PaymentRefusedIntegrationEvent>
     {
-        private readonly IUnitOfWork _uow;
         private readonly IOrderRepository _orderRepository;
+        private readonly IUnitOfWork _uow;
 
-        public OrderFinishedEventHandler(IUnitOfWork uow, IOrderRepository orderRepository)
+        public PaymentRefusedEventHandler(IOrderRepository orderRepository, IUnitOfWork uow)
         {
-            _uow = uow;
             _orderRepository = orderRepository;
+            _uow = uow;
         }
 
-        public override async Task Handle(OrderFinishedIntegrationEvent notification, CancellationToken cancellationToken)
+        public override async Task Handle(PaymentRefusedIntegrationEvent notification, CancellationToken cancellationToken)
         {
             var order = await _orderRepository.FindById(notification.OrderId);
-            
-            order.ChangeStatus(OrderStatus.Accept);
+            order.ChangeStatus(OrderStatus.Cancelled);
 
             await _uow.Commit();
-            // talvez enviar email de aviso
+            
+            // talvez enviar email e talvez adicionar o reject reason na ordem
         }
     }
 }

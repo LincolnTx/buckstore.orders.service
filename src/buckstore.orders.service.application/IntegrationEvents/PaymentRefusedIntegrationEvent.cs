@@ -2,12 +2,10 @@
 
 namespace buckstore.orders.service.application.IntegrationEvents
 {
-    public class OrderFinishedIntegrationEvent : IntegrationEvent
+    public class PaymentRefusedIntegrationEvent : IntegrationEvent
     {
-        // possivelmente vai mudar
         public Guid OrderId { get; set; }
-
-        public OrderFinishedIntegrationEvent(Guid orderId) : base(DateTime.Now)
+        public PaymentRefusedIntegrationEvent(Guid orderId) : base(DateTime.Now)
         {
             OrderId = orderId;
         }
