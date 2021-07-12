@@ -13,14 +13,14 @@ namespace buckstore.orders.service.domain.Aggregates.OrderAggregate
         public OrderStatus OrderStatus { get; private set; }
         private int _orderStatusId;
         private readonly List<OrderItem> _orderItems;
-        public IReadOnlyCollection<OrderItem> OrderItems { get; private set; }
+        public IEnumerable<OrderItem> OrderItems => _orderItems.AsReadOnly();
         private decimal _value;
         public decimal Value => _value;
         private DateTime _orderDate;
         private Guid _paymentMethodId;
         public Guid PaymentMethodId => _paymentMethodId;
 
-        public Order(Guid buyerId, string userName, string cpf,  Address address, Guid paymentMethodId,
+        public Order(Guid buyerId, string userName, string cpf,  Address address,
             string alias, string cardNumber, string securityNumber, DateTime cardExpiration, string cardHolderName)
         {
             _orderItems = new List<OrderItem>();
@@ -28,10 +28,10 @@ namespace buckstore.orders.service.domain.Aggregates.OrderAggregate
             _orderStatusId = OrderStatus.StockConfirmation.Id;
             _orderDate = DateTime.Now;
             Address = address;
-            AddDomainEvent(new OrderCreatedDomainEvent(cpf, cardNumber, cardExpiration, alias, securityNumber, cardHolderName));
-
-            var isValid = Guid.TryParse(paymentMethodId.ToString(), out var validId);
-            _paymentMethodId = isValid && paymentMethodId != Guid.Empty? validId : Guid.NewGuid();
+            SetId();
+            _paymentMethodId = Guid.Empty;
+            AddDomainEvent(new OrderCreatedDomainEvent(cpf, cardNumber, cardExpiration, alias, securityNumber, 
+                cardHolderName, Id));
         }
 
         protected Order()
@@ -49,6 +49,11 @@ namespace buckstore.orders.service.domain.Aggregates.OrderAggregate
             var orderItem = new OrderItem(productId, productName, quantity, price);
             _orderItems.Add(orderItem);
             CalculateGoods(price * quantity);
+        }
+
+        public void SetPaymentId(Guid id)
+        {
+            _paymentMethodId = id;
         }
 
         public void ChangeStatus(OrderStatus status)
