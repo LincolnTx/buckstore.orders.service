@@ -31,6 +31,7 @@ namespace buckstore.orders.service.api.v1
 			services.AddSwaggerSetup();
 			services.AddAutoMapper();
 			services.AddDependencyInjectionSetup(Configuration);
+			services.AddAuthenticationSetup();
 			services.AddMediatR(typeof(CommandHandler));
 			services.AddScoped<GlobalExceptionFilterAttribute>();
 			services.AddDatabaseSetup();
@@ -52,6 +53,7 @@ namespace buckstore.orders.service.api.v1
 			app.UseRouting();
 
 			app.UseAuthorization();
+			app.UseAuthentication();
 			app.UseSwaggerSetup();
 
 			app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
