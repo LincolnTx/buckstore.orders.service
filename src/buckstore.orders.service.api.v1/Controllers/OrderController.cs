@@ -21,8 +21,8 @@ namespace buckstore.orders.service.api.v1.Controllers
         [HttpPost]
         public async Task<IActionResult> PostOrder([FromBody] NewOrderCommand newOrder)
         {
-            //var userId = GetTokenClaim("id");
-            newOrder.UserId = Guid.Parse("56b3360d-cd70-4296-8805-91079cba6bf8");
+            var userId = GetTokenClaim("id");
+            newOrder.UserId = Guid.Parse(userId);
             
             var response = await _bus.Send(newOrder);
 
