@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using buckstore.orders.service.domain.Exceptions;
 using buckstore.orders.service.application.Commands;
+using buckstore.orders.service.application.Queries;
 
 namespace buckstore.orders.service.api.v1.Controllers
 {
@@ -20,8 +21,8 @@ namespace buckstore.orders.service.api.v1.Controllers
         [HttpPost]
         public async Task<IActionResult> PostOrder([FromBody] NewOrderCommand newOrder)
         {
-            var userId = GetTokenClaim("id");
-            newOrder.UserId = Guid.Parse(userId);
+            //var userId = GetTokenClaim("id");
+            newOrder.UserId = Guid.Parse("56b3360d-cd70-4296-8805-91079cba6bf8");
             
             var response = await _bus.Send(newOrder);
 
@@ -31,8 +32,7 @@ namespace buckstore.orders.service.api.v1.Controllers
         [HttpGet]
         public async Task<IActionResult> GetOrder(Guid orderId)
         {
-            // mudar para usar query
-            var response = await _bus.Send(new GetOrderCommand{ OrderId =  orderId});
+            var response = await _bus.Send(new GetOrderQuery{ OrderId = orderId});
             
             return Response(201, response);
         }
