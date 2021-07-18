@@ -36,5 +36,16 @@ namespace buckstore.orders.service.api.v1.Controllers
             
             return Response(201, response);
         }
+
+        [HttpGet("list")]
+        public async Task<IActionResult> ListOrders(string[] statusFilter, int pageNumber)
+        { 
+            var userId = GetTokenClaim("id");
+            var query = new ListOrdersQuery(userId, statusFilter, pageNumber);
+
+            var response = await _bus.Send(query);
+
+            return Response(200, response);
+        }
     }
 }

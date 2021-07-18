@@ -1,15 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Dapper;
 using MediatR;
+using AutoMapper;
+using System.Text;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
+using System.Collections.Generic;
 using buckstore.orders.service.application.DTOs;
 using buckstore.orders.service.application.Queries;
 using buckstore.orders.service.application.Queries.ViewModels;
-using Dapper;
 
 namespace buckstore.orders.service.application.QueryHandlers
 {
@@ -26,7 +26,6 @@ namespace buckstore.orders.service.application.QueryHandlers
         {
             using (var dbConnection = DbConnection)
             {
-                DefaultTypeMap.MatchNamesWithUnderscores = true;
                 var command = QueryBuilder(request.StatusFilter);
 
                 try
@@ -51,7 +50,7 @@ namespace buckstore.orders.service.application.QueryHandlers
             }
         }
 
-        string QueryBuilder(List<string> statusFilter)
+        string QueryBuilder(int[] statusFilter)
         {
             const string baseCommand = "SELECT o.\"Id\", o.\"OrderStatusId\", o.value, o.\"OrderDate\" FROM orders.order o"+ 
                                         " WHERE o.\"BuyerId\" = @userId";
@@ -60,7 +59,7 @@ namespace buckstore.orders.service.application.QueryHandlers
 
             if (statusFilter != null && statusFilter.Any())
             {
-                queryBuilder.Append(" AND o.\"OrderStatusId\" IN @statusFilter");
+                queryBuilder.Append(" AND o.\"OrderStatusId\"  = ANY(@statusFilter)");
             }
 
             queryBuilder.Append(
