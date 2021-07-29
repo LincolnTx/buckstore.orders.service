@@ -21,9 +21,11 @@ namespace buckstore.orders.service.infrastructure.CrossCutting.IoC.Configuration
 
                     var tokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidateLifetime = true,
+                        ValidateLifetime = false,
+                        RequireExpirationTime = false,
                         ValidateIssuer = true,
                         ValidateAudience = false,
+                        ValidateIssuerSigningKey = true,
                         ValidIssuer = jwtSettingsIssuer,
                         ValidAudience = jwtSettingsAudience,
                         IssuerSigningKey = new SymmetricSecurityKey(key)
