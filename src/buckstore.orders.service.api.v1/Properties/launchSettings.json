@@ -24,13 +24,17 @@
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
+        "ConnectionString": "Server=127.0.0.1;Port=5432;Database=buckstore-dev-orders;User Id=postgres;Password=polivel@12;MaxPoolSize=5;Pooling=true;SearchPath=orders;",
         "KafkaConfiguration__ConnectionString": "localhost:9092",
         "KafkaConfiguration__Group": "buckstore",
-        "KafkaConfiguration__ManagerToOrdersCreate": "manager-to-orders-create",
-        "KafkaConfiguration__ManagerToOrdersUpdate": "manager-to-orders-update",
-        "KafkaConfiguration__ManagerToOrdersDelete": "manager-to-orders-delete",
         "KafkaConfiguration__OrdersToManager": "orders-to-manager",
-        "KafkaConfiguration__OrdersToProducts": "order-to-products"
+        "KafkaConfiguration__OrdersToProductsStockConfirmation": "order-to-products-stock-confirmation",
+        "KafkaConfiguration__ProductsStockResponseSuccess": "product-to-order-stock-success",
+        "KafkaConfiguration__ProductsStockResponseFail": "product-to-order-stock-fail",
+        "KafkaConfiguration__AuthBuyerCreated": "auth-to-order",
+        "JwtConfiguration__Audience": "BuckstoreFrontEnd",
+        "JwtConfiguration__Secret": "QnVja3N0b3JlIHRva2VuIHBhcmEgYXV0ZW50aWNhY2FvIGRvIHVzdWFyaW8gZSB2YWxpZGFjYW8gZGUgbG9naW4=",
+        "JwtConfiguration__TokenIssuer": "Buckstore"
       }
     }
   }

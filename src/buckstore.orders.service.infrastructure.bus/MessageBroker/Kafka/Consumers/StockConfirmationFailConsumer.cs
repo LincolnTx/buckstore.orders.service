@@ -4,9 +4,9 @@ using buckstore.orders.service.application.IntegrationEvents;
 
 namespace buckstore.orders.service.infrastructure.bus.MessageBroker.Kafka.Consumers
 {
-    public class ProductUpdatedConsumer : KafkaConsumer<ProductUpdatedIntegrationEvent>
+    public class StockConfirmationFailConsumer : KafkaConsumer<StockConfimationFailIntegrationEvent>
     {
-        public ProductUpdatedConsumer(IMediator bus, ILogger<ProductUpdatedConsumer> logger) : base(bus, logger)
+        public StockConfirmationFailConsumer(IMediator bus, ILogger<StockConfirmationFailConsumer> logger) : base(bus, logger)
         {
         }
     }

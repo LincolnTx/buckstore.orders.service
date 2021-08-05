@@ -18,6 +18,10 @@ namespace buckstore.orders.service.domain.SeedWork
 		{
 			_Id = Guid.NewGuid();
 		} 
+		protected void SetId(Guid id)
+		{
+			_Id = id;
+		} 
 		
 			
 

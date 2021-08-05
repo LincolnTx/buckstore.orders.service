@@ -10,7 +10,9 @@
         <PackageReference Include="MassTransit.AspNetCore" Version="7.2.0" />
         <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="7.2.0" />
         <PackageReference Include="MassTransit.Kafka" Version="7.2.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.5" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
+        <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.1.4" />
     </ItemGroup>
     
     <ItemGroup>
@@ -18,6 +20,7 @@
       <ProjectReference Include="..\buckstore.orders.service.infrastructure.bus\buckstore.orders.service.infrastructure.bus.csproj" />
       <ProjectReference Include="..\buckstore.orders.service.infrastructure.Data\buckstore.orders.service.infrastructure.Data.csproj" />
       <ProjectReference Include="..\buckstore.orders.service.infrastructure.environment\buckstore.orders.service.infrastructure.environment.csproj" />
+      <ProjectReference Include="..\buckstore.orders.service.infrastructure.proxy.globalPayments\buckstore.orders.service.infrastructure.proxy.globalPayments.csproj" />
     </ItemGroup>
     
 

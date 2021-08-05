@@ -7,4 +7,16 @@
     <ItemGroup>
         <PackageReference Include="MediatR" Version="8.0.1" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Aggregates\PaymentAggregate\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Aggregates\PaymentAggregate\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Aggregates\PaymentAggregate\**" />
+    </ItemGroup>
 </Project>

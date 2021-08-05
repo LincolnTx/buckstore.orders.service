@@ -30,6 +30,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "buckstore.orders.service.in
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "buckstore.orders.service.infrastructure.bus", "src\buckstore.orders.service.infrastructure.bus\buckstore.orders.service.infrastructure.bus.csproj", "{5A8F1CF1-3938-4CC6-8D6E-D1765DCF7728}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04.5 - Common", "04.5 - Common", "{3DC07D6A-42A5-4EB0-8C9E-973153D0538B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "buckstore.orders.service.infrastructure.common", "src\buckstore.orders.service.infrastructure.common\buckstore.orders.service.infrastructure.common.csproj", "{B1470AAE-5CD6-4EA6-AA5E-EA4290421772}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04.6 - Proxies", "04.6 - Proxies", "{6392EC79-FF80-47BA-8707-289D6D55C9FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "buckstore.orders.service.infrastructure.proxy.globalPayments", "src\buckstore.orders.service.infrastructure.proxy.globalPayments\buckstore.orders.service.infrastructure.proxy.globalPayments.csproj", "{557462A0-52F8-4E82-9CD0-CF447B365107}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 - GlobalPayments", "01 - GlobalPayments", "{E2811DBC-E9B4-45B7-AD1A-48599E7F9F5E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +74,14 @@ Global
 		{5A8F1CF1-3938-4CC6-8D6E-D1765DCF7728}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A8F1CF1-3938-4CC6-8D6E-D1765DCF7728}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A8F1CF1-3938-4CC6-8D6E-D1765DCF7728}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1470AAE-5CD6-4EA6-AA5E-EA4290421772}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1470AAE-5CD6-4EA6-AA5E-EA4290421772}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1470AAE-5CD6-4EA6-AA5E-EA4290421772}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1470AAE-5CD6-4EA6-AA5E-EA4290421772}.Release|Any CPU.Build.0 = Release|Any CPU
+		{557462A0-52F8-4E82-9CD0-CF447B365107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{557462A0-52F8-4E82-9CD0-CF447B365107}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{557462A0-52F8-4E82-9CD0-CF447B365107}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{557462A0-52F8-4E82-9CD0-CF447B365107}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2FA777D6-8B26-4380-9ABF-837C1C2A59E0} = {9DBA9B17-4908-41F9-84F4-F92B8A7B9687}
@@ -77,5 +95,10 @@ Global
 		{ABAA39E3-C007-4844-813E-A99EBA41E877} = {B1DCD034-4E6C-4E92-A38D-150B18B65BD3}
 		{02BB5D38-85BF-42AA-88D6-4F916F592B10} = {63EAF641-33C1-4315-A156-EEDF59243265}
 		{5A8F1CF1-3938-4CC6-8D6E-D1765DCF7728} = {ABAA39E3-C007-4844-813E-A99EBA41E877}
+		{3DC07D6A-42A5-4EB0-8C9E-973153D0538B} = {B1DCD034-4E6C-4E92-A38D-150B18B65BD3}
+		{B1470AAE-5CD6-4EA6-AA5E-EA4290421772} = {3DC07D6A-42A5-4EB0-8C9E-973153D0538B}
+		{6392EC79-FF80-47BA-8707-289D6D55C9FA} = {B1DCD034-4E6C-4E92-A38D-150B18B65BD3}
+		{E2811DBC-E9B4-45B7-AD1A-48599E7F9F5E} = {6392EC79-FF80-47BA-8707-289D6D55C9FA}
+		{557462A0-52F8-4E82-9CD0-CF447B365107} = {E2811DBC-E9B4-45B7-AD1A-48599E7F9F5E}
 	EndGlobalSection
 EndGlobal

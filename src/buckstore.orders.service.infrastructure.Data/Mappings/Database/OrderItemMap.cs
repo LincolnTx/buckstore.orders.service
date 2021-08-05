@@ -13,16 +13,17 @@ namespace buckstore.orders.service.infrastructure.Data.Mappings.Database
             builder.HasKey(item => item.Id);
 
             builder.Property(item => item.ProductName)
+                .HasField("_productName")
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
                 .HasColumnName("product_name")
                 .IsRequired();
 
-            builder.Property(item => item.Quantity)
+            builder.Property<int>("_quantity")
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
                 .HasColumnName("quantity")
                 .IsRequired();
 
-            builder.Property(item => item.Price)
+            builder.Property<decimal>("_price")
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
                 .HasColumnName("price")
                 .IsRequired();

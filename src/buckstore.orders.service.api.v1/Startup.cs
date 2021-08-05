@@ -31,6 +31,7 @@ namespace buckstore.orders.service.api.v1
 			services.AddSwaggerSetup();
 			services.AddAutoMapper();
 			services.AddDependencyInjectionSetup(Configuration);
+			services.AddAuthenticationSetup();
 			services.AddMediatR(typeof(CommandHandler));
 			services.AddScoped<GlobalExceptionFilterAttribute>();
 			services.AddDatabaseSetup();
@@ -51,6 +52,7 @@ namespace buckstore.orders.service.api.v1
 			app.UseCors(option => option.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 			app.UseRouting();
 
+			app.UseAuthentication();
 			app.UseAuthorization();
 			app.UseSwaggerSetup();
 
