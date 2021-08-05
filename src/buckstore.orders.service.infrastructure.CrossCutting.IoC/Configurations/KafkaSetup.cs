@@ -44,10 +44,21 @@ namespace buckstore.orders.service.infrastructure.CrossCutting.IoC.Configuration
                                });
                            });
                        
-                       k.TopicEndpoint<StockConfirmationFailConsumer>(_kafkaConfiguration.ProductsStockResponseFail, _kafkaConfiguration.Group,
+                       k.TopicEndpoint<StockConfimationFailIntegrationEvent>(_kafkaConfiguration.ProductsStockResponseFail, _kafkaConfiguration.Group,
                            e =>
                            {
                                e.ConfigureConsumer<StockConfirmationFailConsumer>(ctx);
+                               e.CreateIfMissing(options =>
+                               {
+                                   options.NumPartitions = 3;
+                                   options.ReplicationFactor = 1;
+                               });
+                           });
+                       
+                       k.TopicEndpoint<BuyerCreatedIntegrationEvent>(_kafkaConfiguration.AuthBuyerCreated, _kafkaConfiguration.Group,
+                           e =>
+                           {
+                               e.ConfigureConsumer<BuyerCreatedConsumer>(ctx);
                                e.CreateIfMissing(options =>
                                {
                                    options.NumPartitions = 3;
@@ -65,6 +76,7 @@ namespace buckstore.orders.service.infrastructure.CrossCutting.IoC.Configuration
         {
             rider.AddConsumer<StockConfirmationConsumer>();
             rider.AddConsumer<StockConfirmationFailConsumer>();
+            rider.AddConsumer<BuyerCreatedConsumer>();
         }
 
         static void AddProducers(this IRiderRegistrationConfigurator rider)

@@ -19,6 +19,13 @@ namespace buckstore.orders.service.domain.Aggregates.BuyerAggregate
             Name = name;
         }
 
+        public Buyer(Guid id, string cpf, string name)
+        {
+            SetId(id);
+            Cpf = cpf;
+            Name = name;
+        }
+
         protected Buyer()
         {
             _paymentMethods = new List<PaymentMethod>();
