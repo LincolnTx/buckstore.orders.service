@@ -41,7 +41,7 @@ namespace buckstore.orders.service.api.v1.Controllers
         public async Task<IActionResult> ListOrders(string[] statusFilter, int pageNumber)
         { 
             var userId = GetTokenClaim("id");
-            var query = new ListOrdersQuery(userId, statusFilter, pageNumber);
+            var query = new ListOrdersQuery(Guid.Parse(userId), statusFilter, pageNumber);
 
             var response = await _bus.Send(query);
 

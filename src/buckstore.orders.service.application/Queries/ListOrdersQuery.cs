@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
 using System.Linq;
 using buckstore.orders.service.application.DTOs;
 
@@ -7,11 +8,11 @@ namespace buckstore.orders.service.application.Queries
     public class ListOrdersQuery : IRequest<GetOrdersResponseDto>
     {
         private const int PageSize = 10;
-        public string BuyerId { get; set; }
+        public Guid BuyerId { get; set; }
         public int[] StatusFilter { get; set; }
         public int Page { get; set; }
 
-        public ListOrdersQuery(string buyerId, string[] statusFilter, int page)
+        public ListOrdersQuery(Guid buyerId, string[] statusFilter, int page)
         {
             BuyerId = buyerId;
             StatusFilter = ValidateArrays(statusFilter);
