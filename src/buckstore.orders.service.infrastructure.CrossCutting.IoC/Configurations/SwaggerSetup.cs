@@ -15,6 +15,14 @@ namespace buckstore.orders.service.infrastructure.CrossCutting.IoC.Configuration
 			if (services == null) throw new ArgumentNullException(nameof(services));
 			services.AddSwaggerGen(s =>
 			{
+				s.SwaggerDoc("v1", new OpenApiInfo
+				{
+					Version = "v1",
+					Title = "BuckStore Orders Api",
+					Description = "Api responsável pelas ações de compra e pedidos do E-Commerce",
+					Contact = new OpenApiContact { Name = "Lincoln Teixeira", Email = "lincolnsf98@gmail.com" }
+				});
+				
 				s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
 				{
 					Description = "Token JWT de autorização Scheme Bearer",

@@ -25,22 +25,21 @@ namespace buckstore.orders.service.api.v1.Controllers
 			return (!_notifications.HasNotifications());
 		}
 
-		protected new IActionResult Response(int statusCode, object result = null)
+		protected new IActionResult Response(IActionResult action)
 		{
 			if (IsValidOperation())
 			{
-				return StatusCode(statusCode, new
-				{
-					success = true,
-					data = result
-				});
+				return action;
 			}
 
-			return BadRequest(new
-			{
-				success = false,
-				errors = _notifications.GetNotifications()
-			});
+			return BadRequest
+			(
+				new
+				{
+					success = false,
+					errors = _notifications.GetNotifications()
+				}
+			);
 		}
 
 		protected string GetTokenClaim(string claim)

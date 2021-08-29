@@ -6,6 +6,8 @@ namespace buckstore.orders.service.domain.Aggregates.OrderAggregate
 {
     public class OrderItem : Entity
     {
+        private Guid _productId;
+        public Guid ProducId => _productId;
         private string _productName;
         public string ProductName => _productName;
         private int _quantity;
@@ -17,7 +19,8 @@ namespace buckstore.orders.service.domain.Aggregates.OrderAggregate
             {
                 throw new OrderingDomainException("Quantidade inválida");
             }
-            SetId(itemId);
+
+            _productId = itemId;
             _productName = productName;
             _quantity = quantity;
             _price = price;

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using buckstore.orders.service.infrastructure.Data.Context;
@@ -16,6 +17,13 @@ namespace buckstore.orders.service.infrastructure.Data.Repositories.BuyerReposit
         {
             return await _dbSet.Include(b => b.PaymentMethods)
                 .Where(b => b.Cpf == cpf).SingleOrDefaultAsync();
+        }
+
+        public async Task<Buyer> GetBuyerById(Guid id)
+        {
+            return await  _dbSet.Include(b => b.PaymentMethods)
+                .Where(b => b.Id.Equals(id))
+                .SingleOrDefaultAsync();
         }
     }
 }

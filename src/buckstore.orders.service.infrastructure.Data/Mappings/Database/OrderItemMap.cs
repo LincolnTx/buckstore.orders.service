@@ -11,7 +11,13 @@ namespace buckstore.orders.service.infrastructure.Data.Mappings.Database
             builder.ToTable("order_item");
 
             builder.HasKey(item => item.Id);
-
+            
+            builder.Property(item => item.ProducId)
+                .HasField("_productId")
+                .UsePropertyAccessMode(PropertyAccessMode.Field)
+                .HasColumnName("product_id")
+                .IsRequired();
+            
             builder.Property(item => item.ProductName)
                 .HasField("_productName")
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
