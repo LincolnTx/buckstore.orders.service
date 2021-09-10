@@ -58,7 +58,6 @@ namespace buckstore.orders.service.domain.Aggregates.OrderAggregate
 
         public void ChangeStatus(OrderStatus status)
         {
-            OrderStatus = status;
             _orderStatusId = status.Id;
         }
         // TODO Criar domain event para quando o pedido mudar de status, Cancelado ou aceito
