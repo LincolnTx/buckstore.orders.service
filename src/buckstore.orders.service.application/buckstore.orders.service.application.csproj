@@ -18,9 +18,5 @@
     <ItemGroup>
       <ProjectReference Include="..\buckstore.orders.service.domain\buckstore.orders.service.domain.csproj" />
     </ItemGroup>
-    
-    <ItemGroup>
-      <Folder Include="Adapters\Proxy\Payment\Dtos" />
-    </ItemGroup>
 
 </Project>

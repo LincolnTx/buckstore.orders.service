@@ -51,6 +51,7 @@ namespace buckstore.orders.service.infrastructure.CrossCutting.IoC
 		public static void RegisterEnvironment(IServiceCollection services, IConfiguration configuration)
 		{
 			services.AddSingleton(configuration.GetSection("KafkaConfiguration").Get<KafkaConfiguration>());
+			services.AddSingleton(configuration.GetSection("FkdPayConfiguration").Get<FkdPayConfiguration>());
 		}
 		public static void RegistersApplicationServices(IServiceCollection services)
 		{
