@@ -7,11 +7,13 @@ namespace buckstore.orders.service.domain.Events
     {
         public PaymentMethod Payment { get; set; }
         public Guid OrderId { get; set; }
+        public bool IsNewPaymentMethod { get; set; } 
 
-        public BuyerAndPaymentMethodVerifiedDomainEvent(PaymentMethod payment, Guid orderId)
+        public BuyerAndPaymentMethodVerifiedDomainEvent(PaymentMethod payment, Guid orderId, bool isNewPaymentMethod)
         {
             Payment = payment;
             OrderId = orderId;
+            IsNewPaymentMethod = isNewPaymentMethod;
         }
     }
 }

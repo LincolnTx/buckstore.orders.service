@@ -38,12 +38,12 @@ namespace buckstore.orders.service.domain.Aggregates.BuyerAggregate
 
             if (existingPayment != null)
             {
-                AddDomainEvent(new BuyerAndPaymentMethodVerifiedDomainEvent(existingPayment, orderId));
+                AddDomainEvent(new BuyerAndPaymentMethodVerifiedDomainEvent(existingPayment, orderId, false));
                 return;
             }
             var payment = new PaymentMethod(alias, cardNumber, securityNumber, cardHolderName, expiration);
             _paymentMethods.Add(payment);
-            AddDomainEvent(new BuyerAndPaymentMethodVerifiedDomainEvent(payment, orderId));
+            AddDomainEvent(new BuyerAndPaymentMethodVerifiedDomainEvent(payment, orderId, true));
         }
     }
 }
