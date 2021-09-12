@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using buckstore.orders.service.domain.Exceptions;
 using buckstore.orders.service.application.IntegrationEvents;
 using buckstore.orders.service.application.Adapters.MessageBroker;
+using buckstore.orders.service.application.Adapters.Proxy.Payment;
 using buckstore.orders.service.domain.Aggregates.BuyerAggregate;
 using buckstore.orders.service.domain.Aggregates.OrderAggregate;
 using buckstore.orders.service.domain.SeedWork;
@@ -54,7 +55,7 @@ namespace buckstore.orders.service.infrastructure.CrossCutting.IoC
 		public static void RegistersApplicationServices(IServiceCollection services)
 		{
 			// configurar CB olhando da BFF
-			services.AddHttpClient<IPaymentService, GlobalPaymentsService>();
+			services.AddHttpClient<IPaymentService, FkdPaymentsService>();
 		}
 	}
 }
