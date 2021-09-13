@@ -11,5 +11,6 @@ namespace buckstore.orders.service.infrastructure.environment.Configuration
         public string ProductsStockResponseFail { get; set; }
         public string OrdersToProductsStockConfirmation { get;set; }
         public string AuthBuyerCreated { get; set; }
+        public string OrderRollbackProducts { get; set; }
     }
 }

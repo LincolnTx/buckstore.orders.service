@@ -84,6 +84,7 @@ namespace buckstore.orders.service.infrastructure.CrossCutting.IoC.Configuration
             rider.AddProducer<OrderFinishedIntegrationEvent>("order-finished"); // talvez deletar
             rider.AddProducer<OrderToManagerIntegrationEvent>(_kafkaConfiguration.OrdersToManager);
             rider.AddProducer<OrderCreatedIntegrationEvent>(_kafkaConfiguration.OrdersToProductsStockConfirmation);
+            rider.AddProducer<OrderRollbackIntegrationEvent>(_kafkaConfiguration.OrderRollbackProducts);
         }
     }
 }
