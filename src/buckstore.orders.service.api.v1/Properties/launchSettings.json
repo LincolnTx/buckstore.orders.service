@@ -33,6 +33,7 @@
         "KafkaConfiguration__ProductsStockResponseFail": "product-to-order-stock-fail",
         "KafkaConfiguration__AuthBuyerCreated": "auth-to-order",
         "KafkaConfiguration__OrderRollbackProducts": "order-to-products-rollback",
+        "KafkaConfiguration__ManagerStockUpdate": "manger-stock-update",
         "JwtConfiguration__Audience": "BuckstoreFrontEnd",
         "JwtConfiguration__Secret": "QnVja3N0b3JlIHRva2VuIHBhcmEgYXV0ZW50aWNhY2FvIGRvIHVzdWFyaW8gZSB2YWxpZGFjYW8gZGUgbG9naW4=",
         "JwtConfiguration__TokenIssuer": "Buckstore",

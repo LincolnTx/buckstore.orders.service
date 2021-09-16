@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace buckstore.orders.service.infrastructure.environment.Configuration
 {
     public class KafkaConfiguration
@@ -12,5 +11,6 @@ namespace buckstore.orders.service.infrastructure.environment.Configuration
         public string OrdersToProductsStockConfirmation { get;set; }
         public string AuthBuyerCreated { get; set; }
         public string OrderRollbackProducts { get; set; }
+        public string ManagerStockUpdate { get; set; }
     }
 }

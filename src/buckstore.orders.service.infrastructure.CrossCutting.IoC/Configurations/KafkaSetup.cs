@@ -85,6 +85,7 @@ namespace buckstore.orders.service.infrastructure.CrossCutting.IoC.Configuration
             rider.AddProducer<OrderToManagerIntegrationEvent>(_kafkaConfiguration.OrdersToManager);
             rider.AddProducer<OrderCreatedIntegrationEvent>(_kafkaConfiguration.OrdersToProductsStockConfirmation);
             rider.AddProducer<OrderRollbackIntegrationEvent>(_kafkaConfiguration.OrderRollbackProducts);
+            rider.AddProducer<StockUpdateIntegrationEvent>(_kafkaConfiguration.ManagerStockUpdate);
         }
     }
 }
