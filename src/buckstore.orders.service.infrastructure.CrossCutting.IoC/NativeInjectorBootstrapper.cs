@@ -47,6 +47,7 @@ namespace buckstore.orders.service.infrastructure.CrossCutting.IoC
 			services.AddScoped<IMessageProducer<OrderToManagerIntegrationEvent>, KafkaProducer<OrderToManagerIntegrationEvent>>();
 			services.AddScoped<IMessageProducer<OrderCreatedIntegrationEvent>, KafkaProducer<OrderCreatedIntegrationEvent>>();
 			services.AddScoped<IMessageProducer<StockUpdateIntegrationEvent>, KafkaProducer<StockUpdateIntegrationEvent>>();
+			services.AddScoped<IMessageProducer<OrderRollbackIntegrationEvent>, KafkaProducer<OrderRollbackIntegrationEvent>>();
 		}
 
 		public static void RegisterEnvironment(IServiceCollection services, IConfiguration configuration)
