@@ -34,7 +34,7 @@ namespace buckstore.orders.service.application.CommandHandlers
 
             var address = new Address(request.Street, request.ZipCode, request.District, request.City, request.State);
             var order = new Order(request.UserId, request.UserName, request.Cpf, address,
-                request.CardAlias, request.CardNumber, request.CardSecurityNumber, request.CardExpiration, request.CardHolderName);
+                request.CardAlias, request.CardNumber, request.CardSecurityNumber, request.CardExpiration, request.CardHolderName, request.PaymentMethodId);
 
             foreach (var item in request.OrderItems)
             {

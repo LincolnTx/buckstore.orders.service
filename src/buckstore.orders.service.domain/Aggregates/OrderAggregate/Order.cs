@@ -21,7 +21,7 @@ namespace buckstore.orders.service.domain.Aggregates.OrderAggregate
         public Guid PaymentMethodId => _paymentMethodId;
 
         public Order(Guid buyerId, string userName, string cpf,  Address address,
-            string alias, string cardNumber, string securityNumber, DateTime cardExpiration, string cardHolderName)
+            string alias, string cardNumber, string securityNumber, DateTime cardExpiration, string cardHolderName, Guid paymentId)
         {
             _orderItems = new List<OrderItem>();
             _buyerid = buyerId;
@@ -29,9 +29,9 @@ namespace buckstore.orders.service.domain.Aggregates.OrderAggregate
             _orderDate = DateTime.Now;
             Address = address;
             SetId();
-            _paymentMethodId = Guid.Empty;
+            _paymentMethodId = paymentId;
             AddDomainEvent(new OrderCreatedDomainEvent(cpf, cardNumber, cardExpiration, alias, securityNumber, 
-                cardHolderName, Id));
+                cardHolderName, Id, _paymentMethodId));
         }
 
         protected Order()

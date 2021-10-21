@@ -11,10 +11,11 @@ namespace buckstore.orders.service.domain.Events
         public string SecurityNumber { get; set; }
         public string CardHolderName { get; set; }
         public Guid OrderId { get; set; }
+        public Guid PaymentMethodId { get; set; }
 
 
         public OrderCreatedDomainEvent(string cpf, string cardNumber, DateTime cardExpiration, string @alias, string securityNumber, 
-            string cardHolderName, Guid orderId)
+            string cardHolderName, Guid orderId, Guid paymentMethodId = default)
         {
             Cpf = cpf;
             CardNumber = cardNumber;
@@ -23,6 +24,7 @@ namespace buckstore.orders.service.domain.Events
             SecurityNumber = securityNumber;
             CardHolderName = cardHolderName;
             OrderId = orderId;
+            PaymentMethodId = paymentMethodId;
         }
     }
 }
