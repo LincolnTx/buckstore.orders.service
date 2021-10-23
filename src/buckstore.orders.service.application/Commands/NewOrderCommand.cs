@@ -16,6 +16,7 @@ namespace buckstore.orders.service.application.Commands
         public string District { get; set; }
         public string City { get; set; }
         public string State { get; set; }
+        public int AddressNumber { get; set; }
         public string CardNumber { get; set; }
         public string CardAlias { get; set; }
         public string CardHolderName  { get; set; }

@@ -9,14 +9,16 @@ namespace buckstore.orders.service.domain.Aggregates.OrderAggregate
         public string District { get; private set; }
         public string City { get; private set; }
         public string State { get; private set; }
+        public int Number { get; set; }
 
-        public Address(string street, string zipCode, string district, string city, string state)
+        public Address(string street, string zipCode, string district, string city, string state, int number)
         {
             Street = street;
             ZipCode = zipCode;
             District = district;
             City = city;
             State = state;
+            Number = number;
         }
     }
 }
