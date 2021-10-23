@@ -26,7 +26,10 @@ namespace buckstore.orders.service.api.v1.Controllers
         public async Task<IActionResult> PostOrder([FromBody] NewOrderCommand newOrder)
         {
             var userId = GetTokenClaim("id");
+
+           var name = GetTokenClaim("userName");
             newOrder.UserId = Guid.Parse(userId);
+            newOrder.UserName = name;
             
             var response = await _bus.Send(newOrder);
 
