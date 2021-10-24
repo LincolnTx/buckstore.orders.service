@@ -7,6 +7,7 @@ using buckstore.orders.service.application.DTOs;
 using buckstore.orders.service.domain.SeedWork;
 using buckstore.orders.service.application.IntegrationEvents;
 using buckstore.orders.service.domain.Aggregates.OrderAggregate;
+using MediatR;
 
 namespace buckstore.orders.service.application.EventHandlers.IntegrationEvents
 {
@@ -15,12 +16,14 @@ namespace buckstore.orders.service.application.EventHandlers.IntegrationEvents
         private readonly IOrderRepository _orderRepository;
         private readonly IUnitOfWork _uow;
         private IMapper _mapper;
+        private readonly IMediator _bus;
 
-        public PaymentRefusedEventHandler(IOrderRepository orderRepository, IUnitOfWork uow, IMapper mapper)
+        public PaymentRefusedEventHandler(IOrderRepository orderRepository, IUnitOfWork uow, IMapper mapper, IMediator bus)
         {
             _orderRepository = orderRepository;
             _uow = uow;
             _mapper = mapper;
+            _bus = bus;
         }
 
         public override async Task Handle(PaymentRefusedIntegrationEvent notification, CancellationToken cancellationToken)
@@ -30,11 +33,11 @@ namespace buckstore.orders.service.application.EventHandlers.IntegrationEvents
 
             if (!await _uow.Commit())
                 return;
-            
-            // enviar evento de rollback para a api de products
 
             var orderItems = _mapper.Map<IEnumerable<OrderItemDto>>(order.OrderItems);
             var @event = new OrderRollbackIntegrationEvent(orderItems, order.Id);
+
+            await _bus.Publish(@event, cancellationToken);
 
             // talvez enviar email e talvez adicionar o reject reason na ordem
         }
