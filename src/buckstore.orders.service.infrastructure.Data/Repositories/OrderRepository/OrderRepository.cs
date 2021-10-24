@@ -16,7 +16,8 @@ namespace buckstore.orders.service.infrastructure.Data.Repositories.OrderReposit
 
         public async Task<Order> FindById(Guid id)
         {
-            return await _dbSet.FindAsync(id);
+            return await _dbSet.Include(order => order.OrderItems)
+                .FirstOrDefaultAsync(order => order.Id == id);
         }
 
         public async Task<PaymentMethod> FindPaymentMethod(Guid orderId)

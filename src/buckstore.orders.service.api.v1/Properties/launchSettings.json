@@ -37,7 +37,7 @@
         "JwtConfiguration__Audience": "BuckstoreFrontEnd",
         "JwtConfiguration__Secret": "QnVja3N0b3JlIHRva2VuIHBhcmEgYXV0ZW50aWNhY2FvIGRvIHVzdWFyaW8gZSB2YWxpZGFjYW8gZGUgbG9naW4=",
         "JwtConfiguration__TokenIssuer": "Buckstore",
-        "FkdPayConfiguration__BaseUrl": "https://fkd-pay.herokuapp.com/"
+        "FkdPayConfiguration__BaseUrl": "https://fkd-pay.herokuapp.com/payment/paymentcard/"
       }
     }
   }
