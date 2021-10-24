@@ -60,7 +60,13 @@ namespace buckstore.orders.service.domain.Aggregates.OrderAggregate
         {
             _orderStatusId = status.Id;
         }
-        // TODO Criar domain event para quando o pedido mudar de status, Cancelado ou aceito
+
+        public void AddDiscount(int percent)
+        {
+            var discountValue = (percent / new decimal(100)) * _value;
+
+            _value -= discountValue;
+        }
         void CalculateGoods(decimal price)
         {
             _value += price;

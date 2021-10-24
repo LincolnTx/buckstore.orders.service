@@ -24,6 +24,7 @@ namespace buckstore.orders.service.application.Commands
         public string CardSecurityNumber { get; set; }
         public IEnumerable<OrderItemDto> OrderItems { get; set; }
         public Guid PaymentMethodId { get; set; }
+        public int DiscountPercent { get; set; }
 
         public NewOrderCommand()
         {

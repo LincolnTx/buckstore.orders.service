@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -39,6 +40,11 @@ namespace buckstore.orders.service.application.CommandHandlers
             foreach (var item in request.OrderItems)
             {
                 order.AddDeliveryItem(item.ProductId, item.ProductName, item.Quantity, item.Price);
+            }
+
+            if (request.DiscountPercent != default)
+            {
+                order.AddDiscount(request.DiscountPercent);
             }
             _orderRepository.Add(order);
 
