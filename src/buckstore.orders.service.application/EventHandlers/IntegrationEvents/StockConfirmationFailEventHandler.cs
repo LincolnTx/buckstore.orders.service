@@ -20,7 +20,7 @@ namespace buckstore.orders.service.application.EventHandlers.IntegrationEvents
 
         public override async Task Handle(StockConfimationFailIntegrationEvent notification, CancellationToken cancellationToken)
         {
-            var order = await _orderRepository.FindById(notification.OrderId);
+            var order = await _orderRepository.FindOrderWithItemsById(notification.OrderId);
 
             if (order == null)
             {
