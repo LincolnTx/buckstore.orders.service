@@ -6,7 +6,7 @@ using buckstore.orders.service.application.Validations;
 
 namespace buckstore.orders.service.application.Commands
 {
-    public class NewOrderCommand : Command, IRequest<bool>
+    public class NewOrderCommand : Command, IRequest<OrderResponseDto>
     {
         public Guid UserId { get; set; }
         public string UserName { get; set; }

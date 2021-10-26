@@ -12,11 +12,13 @@ namespace buckstore.orders.service.domain.Aggregates.OrderAggregate
         public Guid BuyerId => _buyerid;
         public OrderStatus OrderStatus { get; private set; }
         private int _orderStatusId;
+        public int OrderStatusId => _orderStatusId;
         private readonly List<OrderItem> _orderItems;
         public IEnumerable<OrderItem> OrderItems => _orderItems.AsReadOnly();
         private decimal _value;
         public decimal Value => _value;
         private DateTime _orderDate;
+        public DateTime OrderDate => _orderDate;
         private Guid _paymentMethodId;
         public Guid PaymentMethodId => _paymentMethodId;
 
