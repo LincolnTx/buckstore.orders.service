@@ -33,7 +33,7 @@ namespace buckstore.orders.service.api.v1.Controllers
             
             var response = await _bus.Send(newOrder);
 
-            return Response(Ok(new BaseResponseDto<bool>(true, response)));
+            return Response(Ok(new BaseResponseDto<OrderResponseDto>(true, response)));
         }
 
         [HttpGet]
