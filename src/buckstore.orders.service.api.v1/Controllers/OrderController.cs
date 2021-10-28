@@ -22,7 +22,7 @@ namespace buckstore.orders.service.api.v1.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(bool), (int) HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(OrderResponseDto), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> PostOrder([FromBody] NewOrderCommand newOrder)
         {
             var userId = GetTokenClaim("id");
