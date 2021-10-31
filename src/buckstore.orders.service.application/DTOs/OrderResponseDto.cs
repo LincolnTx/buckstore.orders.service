@@ -9,6 +9,8 @@ namespace buckstore.orders.service.application.DTOs
           public string OrderStatus { get; set; }
           public decimal OrderAmount { get; set; }
           public DateTime OrderDate { get; set; }
+
+          public OrderProduct[] OrderItems { get; set; }
           // talvez adicionar endereço para cada ordem
   
           public OrderResponseDto(){ }
@@ -21,4 +23,11 @@ namespace buckstore.orders.service.application.DTOs
               OrderDate = orderDate;
           } 
     }
+   public class OrderProduct
+   {
+       public Guid ProductId { get; set; }
+       public string ProductName { get; set; }
+       public decimal Price { get; set; }
+       public int Quantity { get; set; }
+   }
 }

@@ -11,12 +11,12 @@ using buckstore.orders.service.application.Queries.ViewModels;
 
 namespace buckstore.orders.service.application.QueryHandlers
 {
-    public class GetProductByIdQueryHandler : QueryHandler, IRequestHandler<GetOrderQuery, OrderResponseDto>
+    public class GetOrderByIdQueryHandler : QueryHandler, IRequestHandler<GetOrderQuery, OrderResponseDto>
     {
         private readonly IMediator _bus;
         private readonly IMapper _mapper;
 
-        public GetProductByIdQueryHandler(IMediator bus, IMapper mapper)
+        public GetOrderByIdQueryHandler(IMediator bus, IMapper mapper)
         {
             _bus = bus;
             _mapper = mapper;
@@ -26,8 +26,13 @@ namespace buckstore.orders.service.application.QueryHandlers
         {
             using (var dbConnection = DbConnection)
             {
-                const string sqlCommand = "SELECT o.\"Id\", o.\"OrderStatusId\", o.value, o.\"OrderDate\" " + 
-                                          "FROM orders.order o WHERE o.\"Id\" = @orderId";
+                const string sqlCommand = "SELECT o.\"Id\", o.\"OrderStatusId\", o.value, o.\"OrderDate\", " + 
+                                           "coalesce (order_item.items, '[]') as OrderItems " +
+                                          "FROM orders.order o LEFT JOIN LATERAL ( " +
+                                           "select json_agg(json_build_object('ProductName', oi.product_name, " +
+                                           "'Price', oi.price, 'Quantity', oi.quantity, 'ProductId', oi.product_id )) " +
+                                           "as items from orders.order_item oi where oi.\"OrderId\" =o.\"Id\" " +
+                                           ") order_item on true where o.\"Id\" =  @orderId";
 
                 try
                 {
