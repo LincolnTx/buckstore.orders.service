@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 using buckstore.orders.service.api.v1.ResponseDtos;
 using buckstore.orders.service.application.DTOs;
@@ -25,6 +26,16 @@ namespace buckstore.orders.service.api.v1.Controllers
             var response = await _bus.Send(request);
 
             return Response(Ok(new BaseResponseDto<HistoricalMonthlyReportDto>(true, response)));
+        }
+        
+        [HttpGet("daily{statusIdFilter}/{startDate}/{endDate}")]
+        [ProducesResponseType(typeof(DailyOrdersReportDto), (int) HttpStatusCode.OK)]
+        public async Task<IActionResult> DailyReport(int statusIdFilter, DateTime startDate, DateTime endDate)
+        {
+            var request = new DailyOrdersReportQuery(startDate, endDate, statusIdFilter);
+            var response = await _bus.Send(request);
+
+            return Response(Ok(new BaseResponseDto<DailyOrdersReportDto>(true, response)));
         }
     }
 }

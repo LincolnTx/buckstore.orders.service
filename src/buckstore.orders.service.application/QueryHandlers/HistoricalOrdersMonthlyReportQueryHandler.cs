@@ -1,17 +1,25 @@
-﻿using System;
-using System.Text;
+﻿using Dapper;
+using System;
 using MediatR;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using buckstore.orders.service.application.DTOs;
+using buckstore.orders.service.domain.Exceptions;
 using buckstore.orders.service.application.Queries;
 using buckstore.orders.service.application.Queries.ViewModels;
-using Dapper;
 
 namespace buckstore.orders.service.application.QueryHandlers
 {
     public class HistoricalOrdersMonthlyReportQueryHandler : QueryHandler, IRequestHandler<HistoricalOrdersMonthlyReportQuery, HistoricalMonthlyReportDto>
     {
+        private readonly IMediator _bus;
+
+        public HistoricalOrdersMonthlyReportQueryHandler(IMediator bus)
+        {
+            _bus = bus;
+        }
+
         public async Task<HistoricalMonthlyReportDto> Handle(HistoricalOrdersMonthlyReportQuery request, CancellationToken cancellationToken)
         {
             using var dbConnection = DbConnection;
@@ -29,8 +37,10 @@ namespace buckstore.orders.service.application.QueryHandlers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                await _bus.Publish(new ExceptionNotification("016", 
+                        "Erro ao gerar relatório histórico mensal"),
+                    cancellationToken);
+                return default;
             }
         }
 
