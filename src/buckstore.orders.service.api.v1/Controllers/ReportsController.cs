@@ -28,7 +28,7 @@ namespace buckstore.orders.service.api.v1.Controllers
             return Response(Ok(new BaseResponseDto<HistoricalMonthlyReportDto>(true, response)));
         }
         
-        [HttpGet("daily{statusIdFilter}/{startDate}/{endDate}")]
+        [HttpGet("daily/{statusIdFilter}/{startDate}/{endDate}")]
         [ProducesResponseType(typeof(DailyOrdersReportDto), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> DailyReport(int statusIdFilter, DateTime startDate, DateTime endDate)
         {
