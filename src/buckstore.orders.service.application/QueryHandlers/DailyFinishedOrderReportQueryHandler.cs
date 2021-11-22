@@ -34,7 +34,7 @@ namespace buckstore.orders.service.application.QueryHandlers
 
             using var dbConnection = DbConnection;
             
-            const string sqlCommand = "SELECT to_char(date_trunc('day', o.\"OrderDate\"), 'DD-MM') AS DayMonth, " +
+            const string sqlCommand = "SELECT to_char(date_trunc('day', o.\"OrderDate\"), 'YYYY') AS Year, " +
                                       "count(o.value) TotalOrders, sum(o.value) AS TotalValue, " +
                                       "to_char(date_trunc('day', o.\"OrderDate\"), 'DD-Mon') as DateSpell " +
                                       "FROM \"order\" o WHERE o.value > @minValue AND o.\"OrderStatusId\" = 3 " +
