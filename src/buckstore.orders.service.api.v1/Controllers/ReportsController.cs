@@ -37,5 +37,15 @@ namespace buckstore.orders.service.api.v1.Controllers
 
             return Response(Ok(new BaseResponseDto<DailyOrdersReportDto>(true, response)));
         }
+        
+        [HttpGet("{minPrice}/{startDate}/{endDate}")]
+        [ProducesResponseType(typeof(DailyFinishedOrderReportDto), (int) HttpStatusCode.OK)]
+        public async Task<IActionResult> MinPriceReport(decimal minPrice, DateTime startDate, DateTime endDate)
+        {
+            var request = new DailyFinishedOrderReportQuery(startDate, endDate, minPrice);
+            var response = await _bus.Send(request);
+        
+            return Response(Ok(new BaseResponseDto<DailyFinishedOrderReportDto>(true, response)));
+        }
     }
 }

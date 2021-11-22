@@ -26,9 +26,11 @@ namespace buckstore.orders.service.application.QueryHandlers
             {
                 foreach (var error in request.GetValidationResult().Errors)
                 {
-                    await _bus.Publish(new ExceptionNotification("0019", error.ErrorMessage, error.PropertyName),
+                    await _bus.Publish(new ExceptionNotification("019", error.ErrorMessage, error.PropertyName),
                         cancellationToken);
                 }
+
+                return default;
             }
             using var dbConnection = DbConnection;
             
