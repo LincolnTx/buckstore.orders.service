@@ -42,7 +42,7 @@ namespace buckstore.orders.service.application.EventHandlers.DomainEvents.OrderC
                      0m
                 ));
                 
-                //await _bus.Publish(registerPaymentIntegrationEvent, cancellationToken);
+                await _bus.Publish(registerPaymentIntegrationEvent, cancellationToken);
             }
 
         }
