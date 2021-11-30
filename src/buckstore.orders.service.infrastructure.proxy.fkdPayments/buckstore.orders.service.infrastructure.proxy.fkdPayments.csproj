@@ -2,11 +2,13 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
+        <RootNamespace>buckstore.orders.service.infrastructure.proxy.globalPayments</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\buckstore.orders.service.application\buckstore.orders.service.application.csproj" />
       <ProjectReference Include="..\buckstore.orders.service.infrastructure.common\buckstore.orders.service.infrastructure.common.csproj" />
+      <ProjectReference Include="..\buckstore.orders.service.infrastructure.environment\buckstore.orders.service.infrastructure.environment.csproj" />
     </ItemGroup>
 
     <ItemGroup>

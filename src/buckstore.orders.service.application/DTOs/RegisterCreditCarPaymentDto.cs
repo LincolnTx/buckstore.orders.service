@@ -2,7 +2,7 @@
 
 namespace buckstore.orders.service.application.DTOs
 {
-    public class CreditCarPaymentDto
+    public class RegisterCreditCarPaymentDto
     {
         public string CardNumber { get; set; }
         public DateTime CardExpiration { get; set; }
@@ -10,7 +10,7 @@ namespace buckstore.orders.service.application.DTOs
         public string CardHolderName { get; set; }
         public decimal OrderAmount { get; set; }
 
-        public CreditCarPaymentDto(string cardNumber, DateTime cardExpiration, string cardSecurityNumber, string cardHolderName, decimal orderAmount)
+        public RegisterCreditCarPaymentDto(string cardNumber, DateTime cardExpiration, string cardSecurityNumber, string cardHolderName, decimal orderAmount)
         {
             CardNumber = cardNumber;
             CardExpiration = cardExpiration;

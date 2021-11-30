@@ -1,9 +1,9 @@
-﻿using System.Threading;
+﻿using MediatR;
+using System.Threading;
 using System.Threading.Tasks;
-using buckstore.orders.service.application.IntegrationEvents;
-using buckstore.orders.service.application.Adapters.MessageBroker;
 using buckstore.orders.service.application.DTOs;
-using MediatR;
+using buckstore.orders.service.application.IntegrationEvents;
+using buckstore.orders.service.application.Adapters.Proxy.Payment;
 
 namespace buckstore.orders.service.application.EventHandlers.IntegrationEvents
 {
@@ -20,10 +20,7 @@ namespace buckstore.orders.service.application.EventHandlers.IntegrationEvents
 
         public override async Task Handle(OrderPaymentPendingIntegrationEvent notification, CancellationToken cancellationToken)
         {
-            var result = _paymentService.CreditCardPay(new CreditCarPaymentDto(notification.CardNumber,
-                notification.CardExpiration,
-                notification.CardSecurityNumber,
-                notification.CardHolderName,
+            var result = await _paymentService.CreditCardPay(new MakePurchaseDto(notification.CardNumber,
                 notification.OrderAmount));
 
             if (!result)

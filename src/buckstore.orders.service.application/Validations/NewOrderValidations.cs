@@ -49,6 +49,8 @@ namespace buckstore.orders.service.application.Validations
             RuleFor(order => order)
                 .Custom((order, context) =>
                 {
+                    if (order.CardNumber == string.Empty) return;
+                    
                     var detector = new CreditCardDetector(order.CardNumber);
                     if (!detector.IsValid())
                     {
@@ -64,6 +66,7 @@ namespace buckstore.orders.service.application.Validations
             RuleFor(order => order.CardNumber)
                 .MaximumLength(22)
                 .NotEmpty()
+                .When(cmd => cmd.PaymentMethodId == default)
                 .WithMessage("O número do cartão é obrigatório e deve conter ate 22 dígitos")
                 .WithErrorCode("004");
 

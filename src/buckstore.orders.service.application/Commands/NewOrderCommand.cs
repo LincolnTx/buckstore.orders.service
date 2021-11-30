@@ -6,7 +6,7 @@ using buckstore.orders.service.application.Validations;
 
 namespace buckstore.orders.service.application.Commands
 {
-    public class NewOrderCommand : Command, IRequest<bool>
+    public class NewOrderCommand : Command, IRequest<OrderResponseDto>
     {
         public Guid UserId { get; set; }
         public string UserName { get; set; }
@@ -16,6 +16,7 @@ namespace buckstore.orders.service.application.Commands
         public string District { get; set; }
         public string City { get; set; }
         public string State { get; set; }
+        public int AddressNumber { get; set; }
         public string CardNumber { get; set; }
         public string CardAlias { get; set; }
         public string CardHolderName  { get; set; }
@@ -23,6 +24,7 @@ namespace buckstore.orders.service.application.Commands
         public string CardSecurityNumber { get; set; }
         public IEnumerable<OrderItemDto> OrderItems { get; set; }
         public Guid PaymentMethodId { get; set; }
+        public int DiscountPercent { get; set; }
 
         public NewOrderCommand()
         {

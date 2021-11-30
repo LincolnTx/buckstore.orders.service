@@ -11,6 +11,7 @@ namespace buckstore.orders.service.domain.Aggregates.OrderAggregate
         private string _productName;
         public string ProductName => _productName;
         private int _quantity;
+        public int Quantity => _quantity;
         private decimal _price;
 
         public OrderItem(Guid itemId, string productName, int quantity, decimal price)

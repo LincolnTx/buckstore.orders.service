@@ -36,7 +36,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "buckstore.orders.service.in
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04.6 - Proxies", "04.6 - Proxies", "{6392EC79-FF80-47BA-8707-289D6D55C9FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "buckstore.orders.service.infrastructure.proxy.globalPayments", "src\buckstore.orders.service.infrastructure.proxy.globalPayments\buckstore.orders.service.infrastructure.proxy.globalPayments.csproj", "{557462A0-52F8-4E82-9CD0-CF447B365107}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "buckstore.orders.service.infrastructure.proxy.fkdPayments", "src\buckstore.orders.service.infrastructure.proxy.fkdPayments\buckstore.orders.service.infrastructure.proxy.fkdPayments.csproj", "{557462A0-52F8-4E82-9CD0-CF447B365107}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 - GlobalPayments", "01 - GlobalPayments", "{E2811DBC-E9B4-45B7-AD1A-48599E7F9F5E}"
 EndProject

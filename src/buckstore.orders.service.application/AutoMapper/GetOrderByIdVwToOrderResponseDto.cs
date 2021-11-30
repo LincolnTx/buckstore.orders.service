@@ -2,6 +2,7 @@
 using buckstore.orders.service.application.DTOs;
 using buckstore.orders.service.application.Queries.ViewModels;
 using buckstore.orders.service.domain.Aggregates.OrderAggregate;
+using ServiceStack.Text;
 
 namespace buckstore.orders.service.application.AutoMapper
 {
@@ -21,7 +22,8 @@ namespace buckstore.orders.service.application.AutoMapper
                     OrderAmount = src.value,
                     OrderDate = src.OrderDate,
                     OrderStatusId = src.OrderStatusId,
-                    OrderStatus = Enumeration.FromValue<OrderStatus>(src.OrderStatusId).Name
+                    OrderStatus = Enumeration.FromValue<OrderStatus>(src.OrderStatusId).Name,
+                    OrderItems = JsonSerializer.DeserializeFromString<OrderProduct[]>(src.OrderItems)
                 });
         }
     }

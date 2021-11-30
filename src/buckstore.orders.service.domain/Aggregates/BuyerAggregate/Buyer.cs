@@ -32,18 +32,27 @@ namespace buckstore.orders.service.domain.Aggregates.BuyerAggregate
         }
 
         public void VerifyAndAddPaymentMethod(string alias, string cardNumber, string securityNumber, string cardHolderName,
-            DateTime expiration, Guid orderId)
+            DateTime expiration, Guid orderId, Guid paymentId = default)
         {
-            var existingPayment = _paymentMethods.SingleOrDefault(p => p.IsEqualTo(cardNumber, expiration));
+            PaymentMethod existingPayment = null;
+            
+            if (paymentId != default)
+            {
+                existingPayment = _paymentMethods.SingleOrDefault(p => p.Id == paymentId);
+            }
+            else
+            {
+                existingPayment = _paymentMethods.SingleOrDefault(p => p.IsEqualTo(cardNumber, expiration));
+            }
 
             if (existingPayment != null)
             {
-                AddDomainEvent(new BuyerAndPaymentMethodVerifiedDomainEvent(existingPayment, orderId));
+                AddDomainEvent(new BuyerAndPaymentMethodVerifiedDomainEvent(existingPayment, orderId, false));
                 return;
             }
             var payment = new PaymentMethod(alias, cardNumber, securityNumber, cardHolderName, expiration);
             _paymentMethods.Add(payment);
-            AddDomainEvent(new BuyerAndPaymentMethodVerifiedDomainEvent(payment, orderId));
+            AddDomainEvent(new BuyerAndPaymentMethodVerifiedDomainEvent(payment, orderId, true));
         }
     }
 }

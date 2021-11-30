@@ -25,7 +25,7 @@ namespace buckstore.orders.service.application.EventHandlers.DomainEvents.OrderC
 
            
             buyer.VerifyAndAddPaymentMethod(notification.Alias, notification.CardNumber, notification.SecurityNumber, 
-                notification.CardHolderName, notification.CardExpiration, notification.OrderId);
+                notification.CardHolderName, notification.CardExpiration, notification.OrderId, notification.PaymentMethodId);
 
             await _buyerRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
         }

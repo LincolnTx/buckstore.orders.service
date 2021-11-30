@@ -12,16 +12,18 @@ namespace buckstore.orders.service.domain.Aggregates.OrderAggregate
         public Guid BuyerId => _buyerid;
         public OrderStatus OrderStatus { get; private set; }
         private int _orderStatusId;
+        public int OrderStatusId => _orderStatusId;
         private readonly List<OrderItem> _orderItems;
         public IEnumerable<OrderItem> OrderItems => _orderItems.AsReadOnly();
         private decimal _value;
         public decimal Value => _value;
         private DateTime _orderDate;
+        public DateTime OrderDate => _orderDate;
         private Guid _paymentMethodId;
         public Guid PaymentMethodId => _paymentMethodId;
 
         public Order(Guid buyerId, string userName, string cpf,  Address address,
-            string alias, string cardNumber, string securityNumber, DateTime cardExpiration, string cardHolderName)
+            string alias, string cardNumber, string securityNumber, DateTime cardExpiration, string cardHolderName, Guid paymentId)
         {
             _orderItems = new List<OrderItem>();
             _buyerid = buyerId;
@@ -29,9 +31,9 @@ namespace buckstore.orders.service.domain.Aggregates.OrderAggregate
             _orderDate = DateTime.Now;
             Address = address;
             SetId();
-            _paymentMethodId = Guid.Empty;
+            _paymentMethodId = paymentId;
             AddDomainEvent(new OrderCreatedDomainEvent(cpf, cardNumber, cardExpiration, alias, securityNumber, 
-                cardHolderName, Id));
+                cardHolderName, Id, _paymentMethodId));
         }
 
         protected Order()
@@ -58,10 +60,15 @@ namespace buckstore.orders.service.domain.Aggregates.OrderAggregate
 
         public void ChangeStatus(OrderStatus status)
         {
-            OrderStatus = status;
             _orderStatusId = status.Id;
         }
-        // TODO Criar domain event para quando o pedido mudar de status, Cancelado ou aceito
+
+        public void AddDiscount(int percent)
+        {
+            var discountValue = (percent / new decimal(100)) * _value;
+
+            _value -= discountValue;
+        }
         void CalculateGoods(decimal price)
         {
             _value += price;

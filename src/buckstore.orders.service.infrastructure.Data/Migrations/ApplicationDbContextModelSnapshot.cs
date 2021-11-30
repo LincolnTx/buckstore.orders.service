@@ -232,6 +232,9 @@ namespace buckstore.orders.service.infrastructure.Data.Migrations
                             b1.Property<string>("District")
                                 .HasColumnType("text");
 
+                            b1.Property<int>("Number")
+                                .HasColumnType("integer");
+
                             b1.Property<string>("State")
                                 .HasColumnType("text");
 
